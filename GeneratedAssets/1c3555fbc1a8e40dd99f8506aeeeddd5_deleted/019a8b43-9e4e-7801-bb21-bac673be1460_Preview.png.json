@@ -1,0 +1,11 @@
+{
+    "asset": "1c3555fbc1a8e40dd99f8506aeeeddd5",
+    "fileName": "019a8b43-9e4e-7801-bb21-bac673be1460_Preview.png",
+    "prompt": "isometric tiles from Tilemap_Flat",
+    "negativePrompt": "",
+    "model": "44ec3749-963a-44b1-aa54-dc19f6ed8ab2",
+    "modelName": "Unity Texture2D",
+    "customSeed": 1320404039,
+    "w3CTraceId": "e4f604fcaedb031f9a48efd5db934ce3",
+    "refinementMode": "Generation"
+}

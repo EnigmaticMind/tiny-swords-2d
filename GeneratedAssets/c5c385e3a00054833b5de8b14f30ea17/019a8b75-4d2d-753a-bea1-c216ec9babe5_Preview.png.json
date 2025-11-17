@@ -1,0 +1,11 @@
+{
+    "asset": "c5c385e3a00054833b5de8b14f30ea17",
+    "fileName": "019a8b75-4d2d-753a-bea1-c216ec9babe5_Preview.png",
+    "prompt": "generic background for a scene",
+    "negativePrompt": "",
+    "model": "44ec3749-963a-44b1-aa54-dc19f6ed8ab2",
+    "modelName": "Unity Texture2D",
+    "customSeed": 82585742,
+    "w3CTraceId": "7016607f71134039d96683707638b463",
+    "refinementMode": "Generation"
+}

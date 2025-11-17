@@ -1,0 +1,11 @@
+{
+    "asset": "c5c385e3a00054833b5de8b14f30ea17",
+    "fileName": "019a8b75-d427-7c93-aabc-735d516a7458_Preview.png",
+    "prompt": "cartoon hand drawn, forest scene, top down",
+    "negativePrompt": "",
+    "model": "44ec3749-963a-44b1-aa54-dc19f6ed8ab2",
+    "modelName": "Unity Texture2D",
+    "customSeed": 148114906,
+    "w3CTraceId": "203f0acf00bfede2bef8964e42319f49",
+    "refinementMode": "Generation"
+}
