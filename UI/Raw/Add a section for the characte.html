@@ -1,0 +1,1127 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI Asset Pack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: 'nest'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet">
+    <style>
+      ::-webkit-scrollbar
+      {
+        display: none;
+      }
+
+      .parchment-bg
+      {
+        background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+      }
+
+      .shadow-medieval
+      {
+        box-shadow: 0 8px 25px rgba(139, 115, 85, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .border-carved
+      {
+        border: 3px solid #8b7355;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .border-carved::before
+      {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 1px solid #5d4e37;
+        border-radius: 10px;
+        z-index: -1;
+      }
+
+      .skill-frame
+      {
+        background: radial-gradient(circle at center, #3a3a3a 0%, #2a2a2a 70%, #1a1a1a 100%);
+        border: 2px solid #6b5b4d;
+      }
+
+      .btn-medieval
+      {
+        background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+        border: 2px solid #4a3f2a;
+        transition: all 0.2s ease;
+      }
+
+      .btn-medieval:hover
+      {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .text-shadow
+      {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme:
+        {
+          extend:
+          {
+            fontFamily:
+            {
+              'medieval': ['Cinzel', 'serif'],
+              'elegant': ['Cormorant Garamond', 'serif']
+            }
+          }
+        }
+      }
+    </script>
+    <style data-grapesjs-styles="true">
+      *
+      {
+        box-sizing: border-box;
+      }
+
+      body
+      {
+        margin: 0;
+      }
+
+      ::-webkit-scrollbar
+      {
+        display: none;
+      }
+
+      .parchment-bg
+      {
+        background-image: linear-gradient(135deg, rgb(244, 241, 232) 0%, rgb(232, 224, 208) 100%);
+        background-position-x: initial;
+        background-position-y: initial;
+        background-size: initial;
+        background-repeat: initial;
+        background-attachment: initial;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: initial;
+      }
+
+      .shadow-medieval
+      {
+        box-shadow: rgba(139, 115, 85, 0.3) 0px 8px 25px, rgba(255, 255, 255, 0.2) 0px 1px 0px inset;
+      }
+
+      .border-carved
+      {
+        border-top-width: 3px;
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+        border-left-width: 3px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(139, 115, 85);
+        border-right-color: rgb(139, 115, 85);
+        border-bottom-color: rgb(139, 115, 85);
+        border-left-color: rgb(139, 115, 85);
+        border-image-source: initial;
+        border-image-slice: initial;
+        border-image-width: initial;
+        border-image-outset: initial;
+        border-image-repeat: initial;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        position: relative;
+      }
+
+      .border-carved::before
+      {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-top-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-left-width: 1px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(93, 78, 55);
+        border-right-color: rgb(93, 78, 55);
+        border-bottom-color: rgb(93, 78, 55);
+        border-left-color: rgb(93, 78, 55);
+        border-image-source: initial;
+        border-image-slice: initial;
+        border-image-width: initial;
+        border-image-outset: initial;
+        border-image-repeat: initial;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        z-index: -1;
+      }
+
+      .skill-frame
+      {
+        background-image: radial-gradient(circle, rgb(58, 58, 58) 0%, rgb(42, 42, 42) 70%, rgb(26, 26, 26) 100%);
+        background-position-x: initial;
+        background-position-y: initial;
+        background-size: initial;
+        background-repeat: initial;
+        background-attachment: initial;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: initial;
+        border-top-width: 2px;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(107, 91, 77);
+        border-right-color: rgb(107, 91, 77);
+        border-bottom-color: rgb(107, 91, 77);
+        border-left-color: rgb(107, 91, 77);
+        border-image-source: initial;
+        border-image-slice: initial;
+        border-image-width: initial;
+        border-image-outset: initial;
+        border-image-repeat: initial;
+      }
+
+      .btn-medieval
+      {
+        background-image: linear-gradient(135deg, rgb(139, 115, 85) 0%, rgb(107, 91, 77) 50%, rgb(93, 78, 55) 100%);
+        background-position-x: initial;
+        background-position-y: initial;
+        background-size: initial;
+        background-repeat: initial;
+        background-attachment: initial;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: initial;
+        border-top-width: 2px;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(74, 63, 42);
+        border-right-color: rgb(74, 63, 42);
+        border-bottom-color: rgb(74, 63, 42);
+        border-left-color: rgb(74, 63, 42);
+        border-image-source: initial;
+        border-image-slice: initial;
+        border-image-width: initial;
+        border-image-outset: initial;
+        border-image-repeat: initial;
+        transition-behavior: normal;
+        transition-duration: 0.2s;
+        transition-timing-function: ease;
+        transition-delay: 0s;
+        transition-property: all;
+      }
+
+      .btn-medieval:hover
+      {
+        transform: translateY(-2px);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 20px;
+      }
+
+      .text-shadow
+      {
+        text-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+      }
+
+      *
+      {
+        box-sizing: border-box;
+      }
+
+      body
+      {
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+      }
+
+      #i1u5nl
+      {
+        background-image: linear-gradient(135deg, rgb(244, 241, 232) 0%, rgb(232, 224, 208) 100%), linear-gradient(135deg, rgb(139, 115, 85), rgb(107, 91, 77), rgb(93, 78, 55));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+      }
+
+      #i8dxea
+      {
+        width: 85%;
+      }
+
+      #itppef
+      {
+        width: 75%;
+      }
+
+      #i6c9tr
+      {
+        width: 62.5%;
+      }
+
+      #i401r4
+      {
+        filter: drop-shadow(rgba(234, 179, 8, 0.6) 0px 0px 8px);
+      }
+
+      #ic6cbj
+      {
+        filter: drop-shadow(rgba(217, 119, 6, 0.6) 0px 0px 8px);
+      }
+
+      #in2dtl
+      {
+        filter: drop-shadow(rgba(249, 115, 22, 0.6) 0px 0px 8px);
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-amber-50 to-stone-200 min-h-screen font-elegant">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI Asset Pack</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI Asset Pack</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI Asset Pack</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI Asset Pack</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet">
+    <div id="header" class="w-full py-8 text-center">
+      <h1 class="text-5xl font-medieval font-bold text-stone-800 text-shadow">
+        Medieval UI Asset Pack</h1>
+      <p class="text-xl text-stone-600 mt-2 font-elegant">Handcrafted Game
+        Interface Elements</p>
+    </div>
+    <div id="main-container" class="max-w-7xl mx-auto px-8 pb-12">
+      <section id="frames-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Decorative Frames</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div id="basic-frame"
+            class="parchment-bg border-carved shadow-medieval p-8 h-48 flex items-center justify-center">
+            <span class="text-stone-700 font-medieval text-lg">Basic
+              Frame</span></div>
+          <div id="ornate-frame"
+            class="parchment-bg border-4 border-double border-stone-600 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div class="absolute top-2 left-2 w-4 h-4 bg-stone-600 rotate-45">
+            </div>
+            <div class="absolute top-2 right-2 w-4 h-4 bg-stone-600 rotate-45">
+            </div>
+            <div
+              class="absolute bottom-2 left-2 w-4 h-4 bg-stone-600 rotate-45">
+            </div>
+            <div
+              class="absolute bottom-2 right-2 w-4 h-4 bg-stone-600 rotate-45">
+            </div><span class="text-stone-700 font-medieval text-lg">Ornate
+              Frame</span>
+          </div>
+          <div id="skill-panel"
+            class="skill-frame shadow-medieval p-8 h-48 flex items-center justify-center border-2 border-amber-700">
+            <span class="text-amber-200 font-medieval text-lg">Skill
+              Panel</span></div>
+          <div id="gothic-frame"
+            class="parchment-bg border-4 border-stone-700 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div
+              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-amber-700 rotate-45">
+            </div>
+            <div
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-8 h-8 bg-amber-700 rotate-45">
+            </div>
+            <div
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-amber-700 rotate-45">
+            </div>
+            <div
+              class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 w-8 h-8 bg-amber-700 rotate-45">
+            </div><span class="text-stone-700 font-medieval text-lg">Gothic
+              Frame</span>
+          </div>
+          <div id="elegant-frame"
+            class="bg-gradient-to-br from-stone-700 to-stone-800 shadow-medieval p-2 h-48">
+            <div
+              class="parchment-bg h-full flex items-center justify-center border-2 border-amber-600">
+              <span class="text-stone-700 font-medieval text-lg">Elegant
+                Frame</span></div>
+          </div>
+          <div id="runic-frame"
+            class="parchment-bg border-4 border-amber-700 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div
+              class="absolute top-3 left-3 w-3 h-3 bg-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute top-3 right-3 w-3 h-3 bg-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute bottom-3 left-3 w-3 h-3 bg-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute bottom-3 right-3 w-3 h-3 bg-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute top-1/2 left-3 transform -translate-y-1/2 w-3 h-3 bg-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute top-1/2 right-3 transform -translate-y-1/2 w-3 h-3 bg-amber-700 rounded-full">
+            </div><span class="text-stone-700 font-medieval text-lg">Runic
+              Frame</span>
+          </div>
+          <div id="shield-frame"
+            class="parchment-bg border-8 border-double border-stone-600 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2"><i
+                class="fa-solid fa-shield text-amber-700 text-2xl"></i></div>
+            <span class="text-stone-700 font-medieval text-lg">Shield
+              Frame</span>
+          </div>
+          <div id="tribal-frame"
+            class="parchment-bg shadow-medieval p-8 h-48 flex items-center justify-center relative border-4 border-stone-700">
+            <div
+              class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-amber-700">
+            </div>
+            <div
+              class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-amber-700">
+            </div>
+            <div
+              class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-amber-700">
+            </div>
+            <div
+              class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-amber-700">
+            </div><span class="text-stone-700 font-medieval text-lg">Tribal
+              Frame</span>
+          </div>
+          <div id="chain-frame"
+            class="parchment-bg border-4 border-stone-700 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div
+              class="absolute top-2 left-2 w-5 h-5 border-3 border-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute top-2 right-2 w-5 h-5 border-3 border-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute bottom-2 left-2 w-5 h-5 border-3 border-amber-700 rounded-full">
+            </div>
+            <div
+              class="absolute bottom-2 right-2 w-5 h-5 border-3 border-amber-700 rounded-full">
+            </div><span class="text-stone-700 font-medieval text-lg">Chain
+              Frame</span>
+          </div>
+          <div id="battle-frame"
+            class="parchment-bg border-4 border-red-800 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div class="absolute top-3 left-3"><i
+                class="fa-solid fa-sword text-red-800 text-sm rotate-45"></i>
+            </div>
+            <div class="absolute top-3 right-3"><i
+                class="fa-solid fa-sword text-red-800 text-sm -rotate-45"></i>
+            </div>
+            <div class="absolute bottom-3 left-3"><i
+                class="fa-solid fa-sword text-red-800 text-sm -rotate-45"></i>
+            </div>
+            <div class="absolute bottom-3 right-3"><i
+                class="fa-solid fa-sword text-red-800 text-sm rotate-45"></i>
+            </div><span class="text-stone-700 font-medieval text-lg">Battle
+              Frame</span>
+          </div>
+        </div>
+      </section>
+      <section id="buttons-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Interactive Buttons</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <button id="primary-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-sword mb-2 block text-xl"></i>
+            Attack
+          </button><button id="secondary-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-shield-halved mb-2 block text-xl"></i>
+            Defend
+          </button><button id="magic-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-wand-magic-sparkles mb-2 block text-xl"></i>
+            Magic
+          </button><button id="inventory-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-bag-shopping mb-2 block text-xl"></i>
+            Items
+          </button><button id="settings-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-gear mb-2 block text-xl"></i>
+            Settings
+          </button><button id="exit-btn"
+            class="btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-door-open mb-2 block text-xl"></i>
+            Exit
+          </button></div>
+      </section>
+      <section id="skill-buttons-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Character Skills</h2>
+        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4">
+          <div id="skill-1"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-amber-600 hover:border-amber-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-fire text-orange-400 text-2xl"></i></div>
+          <div id="skill-2"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-blue-600 hover:border-blue-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-snowflake text-blue-400 text-2xl"></i></div>
+          <div id="skill-3"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-purple-600 hover:border-purple-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-bolt text-purple-400 text-2xl"></i></div>
+          <div id="skill-4"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-green-600 hover:border-green-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-leaf text-green-400 text-2xl"></i></div>
+          <div id="skill-5"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-red-600 hover:border-red-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-heart text-red-400 text-2xl"></i></div>
+          <div id="skill-6"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-yellow-600 hover:border-yellow-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-sun text-yellow-400 text-2xl"></i></div>
+          <div id="skill-7"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-indigo-600 hover:border-indigo-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-moon text-indigo-400 text-2xl"></i></div>
+          <div id="skill-8"
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border border-gray-600 hover:border-gray-400 cursor-pointer transition-all">
+            <i class="fa-solid fa-mountain text-gray-400 text-2xl"></i></div>
+        </div>
+      </section>
+      <section id="skill-menu-bar-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Skill Menu Bar</h2>
+        <div
+          class="max-w-4xl mx-auto parchment-bg border-carved shadow-medieval p-6">
+          <div class="flex justify-center items-center space-x-3">
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+              <i
+                class="fa-solid fa-fire text-orange-400 text-2xl group-hover:text-orange-300"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-800 rounded-full border-2 border-amber-600 flex items-center justify-center">
+                <span
+                  class="text-amber-400 text-xs font-medieval font-bold">1</span>
+              </div>
+              <div
+                class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Fireball</div>
+            </div>
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-blue-600 hover:border-blue-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+              <i
+                class="fa-solid fa-snowflake text-blue-400 text-2xl group-hover:text-blue-300"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-800 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                <span
+                  class="text-blue-400 text-xs font-medieval font-bold">2</span>
+              </div>
+              <div
+                class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Ice Blast</div>
+            </div>
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-purple-600 hover:border-purple-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+              <i
+                class="fa-solid fa-bolt text-purple-400 text-2xl group-hover:text-purple-300"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-800 rounded-full border-2 border-purple-600 flex items-center justify-center">
+                <span
+                  class="text-purple-400 text-xs font-medieval font-bold">3</span>
+              </div>
+              <div
+                class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Lightning</div>
+            </div>
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-dashed border-stone-500 opacity-40 hover:opacity-60 hover:border-stone-400 cursor-not-allowed transition-all duration-200 relative">
+              <i class="fa-solid fa-lock text-stone-500 text-xl"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                <span
+                  class="text-stone-500 text-xs font-medieval font-bold">4</span>
+              </div>
+            </div>
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-dashed border-stone-500 opacity-40 hover:opacity-60 hover:border-stone-400 cursor-not-allowed transition-all duration-200 relative">
+              <i class="fa-solid fa-lock text-stone-500 text-xl"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                <span
+                  class="text-stone-500 text-xs font-medieval font-bold">5</span>
+              </div>
+            </div>
+            <div
+              class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center shadow-medieval border-2 border-dashed border-stone-500 opacity-40 hover:opacity-60 hover:border-stone-400 cursor-not-allowed transition-all duration-200 relative">
+              <i class="fa-solid fa-lock text-stone-500 text-xl"></i>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                <span
+                  class="text-stone-500 text-xs font-medieval font-bold">6</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="decorative-square-frames-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Square Decorative Frames</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="parchment-bg border-4 border-stone-700 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div
+              class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-amber-700">
+            </div>
+            <div
+              class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-amber-700">
+            </div>
+            <div
+              class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-amber-700">
+            </div>
+            <div
+              class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-amber-700">
+            </div><span class="text-stone-700 font-medieval text-lg">Corner
+              Frame</span>
+          </div>
+          <div
+            class="bg-gradient-to-br from-stone-700 to-stone-800 shadow-medieval p-1 h-48">
+            <div class="parchment-bg h-full flex items-center justify-center">
+              <span class="text-stone-700 font-medieval text-lg">Inset
+                Frame</span></div>
+          </div>
+          <div
+            class="parchment-bg border-8 border-double border-amber-700 shadow-medieval p-8 h-48 flex items-center justify-center">
+            <span class="text-stone-700 font-medieval text-lg">Double
+              Border</span></div>
+          <div
+            class="relative parchment-bg shadow-medieval p-8 h-48 flex items-center justify-center border-4 border-stone-600">
+            <div
+              class="absolute top-2 left-2 right-2 bottom-2 border-2 border-amber-600">
+            </div><span
+              class="text-stone-700 font-medieval text-lg z-10">Layered
+              Frame</span>
+          </div>
+          <div
+            class="parchment-bg border-4 border-stone-600 shadow-medieval p-8 h-48 flex items-center justify-center relative">
+            <div
+              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-3 bg-amber-700">
+            </div>
+            <div
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-12 h-3 bg-amber-700">
+            </div>
+            <div
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-3 h-12 bg-amber-700">
+            </div>
+            <div
+              class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 w-3 h-12 bg-amber-700">
+            </div><span class="text-stone-700 font-medieval text-lg">Cross
+              Frame</span>
+          </div>
+          <div id="i1u5nl"
+            class="parchment-bg shadow-medieval p-8 h-48 flex items-center justify-center relative border-4 border-transparent">
+            <span class="text-stone-700 font-medieval text-lg">Gradient
+              Border</span></div>
+        </div>
+      </section>
+      <section id="button-variants-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Button Variations</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6"><button
+            class="btn-medieval text-amber-100 font-medieval py-3 px-6 rounded-lg shadow-medieval hover:shadow-lg"><i
+              class="fa-solid fa-play mr-2"></i>Start</button><button
+            class="bg-gradient-to-r from-red-700 to-red-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-red-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all"><i
+              class="fa-solid fa-fire mr-2"></i>Attack</button><button
+            class="bg-gradient-to-r from-blue-700 to-blue-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-blue-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all"><i
+              class="fa-solid fa-shield-halved mr-2"></i>Defend</button><button
+            class="parchment-bg border-3 border-stone-700 text-stone-800 font-medieval py-3 px-6 rounded-lg shadow-medieval hover:shadow-lg hover:border-amber-600 transition-all"><i
+              class="fa-solid fa-gear mr-2"></i>Settings</button></div>
+      </section>
+      <section id="extended-skills-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Extended Skill Collection</h2>
+        <div
+          class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 gap-4 max-w-5xl mx-auto">
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-cyan-600 hover:border-cyan-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-droplet text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Water</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-orange-600 hover:border-orange-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-wind text-orange-300 text-2xl group-hover:text-orange-200"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Wind</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-rose-600 hover:border-rose-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-skull text-rose-400 text-2xl group-hover:text-rose-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Curse</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-pink-600 hover:border-pink-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-hand-sparkles text-pink-400 text-2xl group-hover:text-pink-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Blessing</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-teal-600 hover:border-teal-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-circle-radiation text-teal-400 text-2xl group-hover:text-teal-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Poison</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-lime-600 hover:border-lime-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-seedling text-lime-400 text-2xl group-hover:text-lime-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Nature</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-explosion text-amber-400 text-2xl group-hover:text-amber-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Blast</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-violet-600 hover:border-violet-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-eye text-violet-400 text-2xl group-hover:text-violet-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Vision</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-compass text-amber-400 text-2xl group-hover:text-amber-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Navigation</div>
+          </div>
+          <div
+            class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+            <i
+              class="fa-solid fa-leaf text-amber-400 text-2xl group-hover:text-amber-300"></i>
+            <div
+              class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-2 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+              Healing</div>
+          </div>
+        </div>
+      </section>
+      <section id="sliders-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Progress Bars &amp; Sliders</h2>
+        <div class="space-y-8 max-w-2xl mx-auto">
+          <div id="health-bar" class="space-y-2">
+            <div class="flex justify-between items-center"><span
+                class="text-stone-700 font-medieval"><i
+                  class="fa-solid fa-heart text-red-500 mr-2"></i>Health</span><span
+                class="text-stone-600 font-medieval">85/100</span></div>
+            <div
+              class="w-full bg-stone-800 rounded-full h-4 border-2 border-stone-600 shadow-inner">
+              <div id="i8dxea"
+                class="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full shadow-lg">
+              </div>
+            </div>
+          </div>
+          <div id="mana-bar" class="space-y-2">
+            <div class="flex justify-between items-center"><span
+                class="text-stone-700 font-medieval"><i
+                  class="fa-solid fa-wand-magic-sparkles text-blue-500 mr-2"></i>Mana</span><span
+                class="text-stone-600 font-medieval">60/80</span></div>
+            <div
+              class="w-full bg-stone-800 rounded-full h-4 border-2 border-stone-600 shadow-inner">
+              <div id="itppef"
+                class="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full shadow-lg">
+              </div>
+            </div>
+          </div>
+          <div id="experience-bar" class="space-y-2">
+            <div class="flex justify-between items-center"><span
+                class="text-stone-700 font-medieval"><i
+                  class="fa-solid fa-star text-yellow-500 mr-2"></i>Experience</span><span
+                class="text-stone-600 font-medieval">1,250/2,000</span></div>
+            <div
+              class="w-full bg-stone-800 rounded-full h-4 border-2 border-stone-600 shadow-inner">
+              <div id="i6c9tr"
+                class="bg-gradient-to-r from-yellow-600 to-yellow-400 h-full rounded-full shadow-lg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="sliders-section-2" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Enhanced UI Elements</h2>
+        <div class="space-y-12 max-w-4xl mx-auto">
+          <!-- Floating Icons with Centered Text -->
+          <div class="space-y-6">
+            <h3 class="text-xl font-medieval text-stone-700 text-center">
+              Floating Icons</h3>
+            <div class="flex justify-center space-x-12">
+              <div class="text-center group cursor-pointer">
+                <div class="relative inline-block"><i
+                    class="fa-solid fa-shield text-blue-500 text-5xl hover:text-blue-400 transition-all duration-300 hover:scale-110 drop-shadow-lg"></i>
+                  <div
+                    class="absolute -bottom-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-blue-500 flex items-center justify-center">
+                    <span
+                      class="text-blue-400 text-sm font-medieval font-bold">28</span>
+                  </div>
+                </div>
+                <div
+                  class="text-stone-700 font-medieval text-xl font-semibold mt-4">
+                  Defense</div>
+              </div>
+              <div class="text-center group cursor-pointer">
+                <div class="relative inline-block"><i
+                    class="fa-solid fa-sword text-red-500 text-5xl hover:text-red-400 transition-all duration-300 hover:scale-110 drop-shadow-lg"></i>
+                  <div
+                    class="absolute -bottom-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-red-500 flex items-center justify-center">
+                    <span
+                      class="text-red-400 text-sm font-medieval font-bold">15</span>
+                  </div>
+                </div>
+                <div
+                  class="text-stone-700 font-medieval text-xl font-semibold mt-4">
+                  Attack</div>
+              </div>
+              <div class="text-center group cursor-pointer">
+                <div class="relative inline-block"><i
+                    class="fa-solid fa-wand-magic-sparkles text-purple-500 text-5xl hover:text-purple-400 transition-all duration-300 hover:scale-110 drop-shadow-lg"></i>
+                  <div
+                    class="absolute -bottom-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-purple-500 flex items-center justify-center">
+                    <span
+                      class="text-purple-400 text-sm font-medieval font-bold">42</span>
+                  </div>
+                </div>
+                <div
+                  class="text-stone-700 font-medieval text-xl font-semibold mt-4">
+                  Magic</div>
+              </div>
+            </div>
+          </div><!-- Enhanced Progress Bars -->
+          <!-- Badge Style Icons -->
+          <div class="space-y-6">
+            <h3 class="text-xl font-medieval text-stone-700 text-center">Badge
+              Style Icons</h3>
+            <div class="flex justify-center space-x-6">
+              <div class="relative group cursor-pointer"><i
+                  class="fa-solid fa-heart text-red-600 text-3xl hover:text-red-500 transition-all duration-300 hover:scale-105"></i>
+                <div
+                  class="absolute -top-3 -right-3 bg-gradient-to-r from-amber-600 to-amber-500 text-white text-xs font-medieval font-bold px-2 py-1 rounded-full border-2 border-stone-800 shadow-lg">
+                  99+
+                </div>
+              </div>
+              <div class="relative group cursor-pointer"><i
+                  class="fa-solid fa-coins text-yellow-600 text-3xl hover:text-yellow-500 transition-all duration-300 hover:scale-105"></i>
+                <div
+                  class="absolute -top-3 -right-3 bg-gradient-to-r from-green-600 to-green-500 text-white text-xs font-medieval font-bold px-2 py-1 rounded-full border-2 border-stone-800 shadow-lg">
+                  1.2K
+                </div>
+              </div>
+              <div class="relative group cursor-pointer"><i
+                  class="fa-solid fa-gem text-emerald-600 text-3xl hover:text-emerald-500 transition-all duration-300 hover:scale-105"></i>
+                <div
+                  class="absolute -top-3 -right-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-medieval font-bold px-2 py-1 rounded-full border-2 border-stone-800 shadow-lg">
+                  7
+                </div>
+              </div>
+            </div>
+          </div><!-- Minimalist Style -->
+          <div class="space-y-6"></div><!-- Parchment Style -->
+          <div class="space-y-6">
+            <h3 class="text-xl font-medieval text-stone-700 text-center">
+              Parchment Style</h3>
+            <div class="flex justify-center space-x-6">
+              <div
+                class="parchment-bg border-2 border-stone-600 rounded-lg p-4 shadow-medieval text-center hover:shadow-lg transition-shadow cursor-pointer group">
+                <i
+                  class="fa-solid fa-bow-arrow text-brown-600 text-2xl group-hover:scale-110 transition-transform"></i>
+                <div class="text-stone-700 font-medieval text-xs mt-1">Arrows
+                </div>
+                <div class="text-stone-800 font-medieval text-lg font-bold">250
+                </div>
+              </div>
+              <div
+                class="parchment-bg border-2 border-stone-600 rounded-lg p-4 shadow-medieval text-center hover:shadow-lg transition-shadow cursor-pointer group">
+                <i
+                  class="fa-solid fa-hammer text-gray-700 text-2xl group-hover:scale-110 transition-transform"></i>
+                <div class="text-stone-700 font-medieval text-xs mt-1">Tools
+                </div>
+                <div class="text-stone-800 font-medieval text-lg font-bold">8
+                </div>
+              </div>
+              <div
+                class="parchment-bg border-2 border-stone-600 rounded-lg p-4 shadow-medieval text-center hover:shadow-lg transition-shadow cursor-pointer group">
+                <i
+                  class="fa-solid fa-book text-indigo-600 text-2xl group-hover:scale-110 transition-transform"></i>
+                <div class="text-stone-700 font-medieval text-xs mt-1">Tomes
+                </div>
+                <div class="text-stone-800 font-medieval text-lg font-bold">4
+                </div>
+              </div>
+            </div>
+          </div><!-- Glowing Effect Style -->
+          <div class="space-y-6">
+            <h3 class="text-xl font-medieval text-stone-700 text-center">Glowing
+              Effect Style</h3>
+            <div class="flex justify-center space-x-8">
+              <div class="relative group cursor-pointer"><i id="i401r4"
+                  class="fa-solid fa-star text-yellow-500 text-3xl hover:text-yellow-400 transition-all duration-300 filter drop-shadow-lg hover:drop-shadow-2xl"></i>
+                <div
+                  class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-stone-700 font-medieval text-sm font-bold">
+                  Level 25
+                </div>
+              </div>
+              <div class="relative group cursor-pointer"><i id="ic6cbj"
+                  class="fa-solid fa-crown text-amber-600 text-3xl hover:text-amber-500 transition-all duration-300 filter drop-shadow-lg hover:drop-shadow-2xl"></i>
+                <div
+                  class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-stone-700 font-medieval text-sm font-bold">
+                  Rank 12
+                </div>
+              </div>
+              <div class="relative group cursor-pointer"><i id="in2dtl"
+                  class="fa-solid fa-trophy text-orange-500 text-3xl hover:text-orange-400 transition-all duration-300 filter drop-shadow-lg hover:drop-shadow-2xl"></i>
+                <div
+                  class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-stone-700 font-medieval text-sm font-bold">
+                  Champion
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="borders-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Decorative Borders</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div id="simple-border"
+            class="p-6 border-4 border-stone-600 bg-gradient-to-br from-amber-50 to-stone-100 shadow-medieval">
+            <h3 class="font-medieval text-xl text-stone-800 mb-4">Simple Border
+            </h3>
+            <p class="text-stone-600">Clean and elegant border design for basic
+              UI elements and content areas.</p>
+          </div>
+          <div id="decorative-border"
+            class="p-6 border-4 border-double border-amber-700 bg-gradient-to-br from-amber-100 to-stone-200 shadow-medieval relative">
+            <div
+              class="absolute -top-2 -left-2 w-4 h-4 bg-amber-700 transform rotate-45">
+            </div>
+            <div
+              class="absolute -top-2 -right-2 w-4 h-4 bg-amber-700 transform rotate-45">
+            </div>
+            <div
+              class="absolute -bottom-2 -left-2 w-4 h-4 bg-amber-700 transform rotate-45">
+            </div>
+            <div
+              class="absolute -bottom-2 -right-2 w-4 h-4 bg-amber-700 transform rotate-45">
+            </div>
+            <h3 class="font-medieval text-xl text-stone-800 mb-4">Decorative
+              Border</h3>
+            <p class="text-stone-600">Ornate border with corner decorations for
+              important dialog boxes and panels.</p>
+          </div>
+        </div>
+      </section>
+      <section id="dialog-boxes-section" class="mb-16">
+        <h2
+          class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Dialog Boxes</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div id="character-dialog"
+            class="parchment-bg border-carved shadow-medieval p-8 relative">
+            <div class="absolute top-4 right-4"><button
+                class="text-stone-600 hover:text-stone-800 transition-colors"><i
+                  class="fa-solid fa-xmark text-xl"></i></button></div>
+            <div class="flex items-start space-x-4">
+              <div
+                class="w-16 h-16 skill-frame rounded-full flex items-center justify-center border border-amber-600">
+                <i class="fa-solid fa-user text-amber-400 text-2xl"></i></div>
+              <div class="flex-1">
+                <h3 class="font-medieval text-xl text-stone-800 mb-2">Village
+                  Elder</h3>
+                <p class="text-stone-600 leading-relaxed">"Greetings, brave
+                  adventurer! The ancient ruins hold many secrets, but beware of
+                  the guardians that protect them."</p>
+                <div class="mt-4 flex space-x-3"><button
+                    class="btn-medieval text-amber-100 font-medieval py-2 px-4 rounded text-sm">Accept
+                    Quest</button><button
+                    class="bg-stone-600 text-stone-100 font-medieval py-2 px-4 rounded text-sm hover:bg-stone-500 transition-colors">Decline</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="character-sprite-section" class="mb-16">
+        <h2 class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">
+          Character Sprite Display</h2>
+        <div class="max-w-md mx-auto">
+          <!-- Character Card -->
+          <div class="parchment-bg border-carved shadow-medieval p-6">
+            <!-- Character Sprite Container -->
+            <div class="relative mb-6">
+              <div class="w-full h-64 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-4 border-stone-600 flex items-center justify-center overflow-hidden shadow-inner">
+                <i class="fa-solid fa-user-ninja text-stone-500 text-8xl opacity-30"></i>
+                <div class="absolute bottom-2 left-2 right-2 text-center">
+                  <span class="text-stone-400 font-medieval text-sm">Character Sprite</span>
+                </div>
+              </div>
+              <!-- Armor Icon Overlay -->
+              <div class="absolute top-3 right-3 bg-stone-800 border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                <i class="fa-solid fa-shield text-blue-400 text-2xl"></i>
+                <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-stone-900 rounded-full border-2 border-blue-500 flex items-center justify-center">
+                  <span class="text-blue-400 text-xs font-medieval font-bold">12</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Character Stats -->
+            <div class="space-y-3">
+              <!-- Health Bar -->
+              <div class="space-y-1">
+                <div class="flex justify-between items-center">
+                  <span class="text-stone-700 font-medieval text-sm flex items-center">
+                    <i class="fa-solid fa-heart text-red-500 mr-2"></i>Health
+                  </span>
+                  <span class="text-stone-600 font-medieval text-sm font-bold">76/80</span>
+                </div>
+                <div class="w-full bg-stone-800 rounded-full h-5 border-2 border-stone-600 shadow-inner relative overflow-hidden">
+                  <div class="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full shadow-lg" style="width: 95%"></div>
+                </div>
+              </div>
+
+              <!-- Mana Bar -->
+              <div class="space-y-1">
+                <div class="flex justify-between items-center">
+                  <span class="text-stone-700 font-medieval text-sm flex items-center">
+                    <i class="fa-solid fa-wand-magic-sparkles text-blue-500 mr-2"></i>Mana
+                  </span>
+                  <span class="text-stone-600 font-medieval text-sm font-bold">42/60</span>
+                </div>
+                <div class="w-full bg-stone-800 rounded-full h-5 border-2 border-stone-600 shadow-inner relative overflow-hidden">
+                  <div class="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full shadow-lg" style="width: 70%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alternative Compact Version -->
+          <div class="parchment-bg border-carved shadow-medieval p-4 mt-8">
+            <div class="flex items-center space-x-4">
+              <!-- Compact Sprite -->
+              <div class="relative flex-shrink-0">
+                <div class="w-24 h-24 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-3 border-stone-600 flex items-center justify-center shadow-inner">
+                  <i class="fa-solid fa-user-shield text-stone-500 text-3xl opacity-30"></i>
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-stone-800 border-2 border-blue-500 rounded p-1">
+                  <i class="fa-solid fa-shield text-blue-400 text-sm"></i>
+                  <span class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-medieval font-bold w-4 h-4 rounded-full flex items-center justify-center">8</span>
+                </div>
+              </div>
+              
+              <!-- Compact Stats -->
+              <div class="flex-1 space-y-2">
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="text-stone-700 font-medieval text-xs"><i class="fa-solid fa-heart text-red-500 mr-1"></i>HP</span>
+                    <span class="text-stone-600 font-medieval text-xs font-bold">45/50</span>
+                  </div>
+                  <div class="w-full bg-stone-800 rounded-full h-3 border border-stone-600 shadow-inner">
+                    <div class="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full" style="width: 90%"></div>
+                  </div>
+                </div>
+                
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="text-stone-700 font-medieval text-xs"><i class="fa-solid fa-wand-magic-sparkles text-blue-500 mr-1"></i>MP</span>
+                    <span class="text-stone-600 font-medieval text-xs font-bold">30/40</span>
+                  </div>
+                  <div class="w-full bg-stone-800 rounded-full h-3 border border-stone-600 shadow-inner">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full" style="width: 75%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer id="footer" class="bg-stone-800 text-stone-300 py-8 text-center">
+      <p class="font-medieval">Medieval UI Asset Pack - Handcrafted Game
+        Interface Elements</p>
+      <p class="text-sm mt-2 text-stone-400">Perfect for RPG, Adventure, and
+        Fantasy Games</p>
+    </footer>
+  </body>
+
+</html>

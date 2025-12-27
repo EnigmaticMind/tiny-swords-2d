@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Selection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}
+    .parchment-bg { background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.15); border-radius: 12px;}
+    .shadow-medieval { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.15); border-radius: 12px;}
+    .border-carved { border: 3px solid #5a4a3a; position: relative; box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15); border-radius: 12px;}
+    .skill-frame { background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%); border: 3px solid #6b5b4d; border-radius: 16px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.35);}
+    .btn-medieval { background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%); border: 3px solid #4a3f2a; border-radius: 12px; transition: all 0.2s ease; position: relative; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.25);}
+    .btn-medieval::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%); border-radius: 12px;}
+    .btn-medieval:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2); filter: brightness(1.1);}
+    .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5);}
+    .character-card { transition: all 0.3s ease;}
+    .character-card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);}
+    .character-card.selected { border: 4px solid #d97706; box-shadow: 0 0 20px rgba(217, 119, 6, 0.6);}
+    .stat-bar { height: 8px; border-radius: 4px; background: #2a2220; border: 1px solid #6b5b4d; overflow: hidden;}
+    .stat-fill { height: 100%; transition: width 0.3s ease;}
+    </style>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'medieval': ['Cinzel', 'serif'],
+                    'elegant': ['Cormorant Garamond', 'serif']
+                }
+            }
+        }
+    }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 min-h-screen font-elegant">
+    <div id="header" class="w-full py-6 text-center border-b-4 border-stone-600 bg-gradient-to-r from-stone-800 to-stone-700 shadow-lg">
+        <h1 class="text-4xl font-medieval font-bold text-amber-200 text-shadow">Choose Your Hero</h1>
+        <p class="text-lg text-stone-300 mt-1 font-elegant">Select a character to begin your journey</p>
+    </div>
+
+    <div id="main-container" class="max-w-7xl mx-auto px-8 py-8">
+        <div id="character-selection-section" class="mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="char-1" class="character-card parchment-bg border-carved shadow-medieval p-4 cursor-pointer relative" onclick="selectCharacter(1)">
+                    <div class="absolute top-2 right-2 opacity-0 transition-opacity" id="selected-badge-1">
+                        <div class="bg-amber-600 rounded-full p-2 border-2 border-amber-800">
+                            <i class="fa-solid fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="w-full h-48 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-2 border-stone-600 flex items-center justify-center overflow-hidden shadow-inner mb-3 relative">
+                        <i class="fa-solid fa-user-ninja text-stone-400 text-6xl"></i>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 rounded px-2 py-1">
+                            <span class="text-amber-400 font-medieval text-xs font-bold">LVL 1</span>
+                        </div>
+                    </div>
+                    <h3 class="font-medieval text-xl text-stone-800 mb-2 text-center">Shadow Assassin</h3>
+                    <p class="text-stone-600 text-sm text-center mb-3">Swift and deadly, strikes from the shadows</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-heart text-red-500 mr-1"></i>Health</span>
+                            <span class="text-stone-600 font-bold">75</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-red-600 to-red-400" style="width: 75%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-bolt text-yellow-500 mr-1"></i>Speed</span>
+                            <span class="text-stone-600 font-bold">95</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-yellow-600 to-yellow-400" style="width: 95%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-sword text-orange-500 mr-1"></i>Attack</span>
+                            <span class="text-stone-600 font-bold">85</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-orange-600 to-orange-400" style="width: 85%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-shield text-blue-500 mr-1"></i>Defense</span>
+                            <span class="text-stone-600 font-bold">45</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-blue-600 to-blue-400" style="width: 45%"></div></div>
+                    </div>
+                    <div class="mt-3 flex justify-center space-x-1">
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-purple-600">
+                            <i class="fa-solid fa-eye-slash text-purple-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-red-600">
+                            <i class="fa-solid fa-dagger text-red-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-green-600">
+                            <i class="fa-solid fa-flask text-green-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="char-2" class="character-card parchment-bg border-carved shadow-medieval p-4 cursor-pointer relative" onclick="selectCharacter(2)">
+                    <div class="absolute top-2 right-2 opacity-0 transition-opacity" id="selected-badge-2">
+                        <div class="bg-amber-600 rounded-full p-2 border-2 border-amber-800">
+                            <i class="fa-solid fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="w-full h-48 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-2 border-stone-600 flex items-center justify-center overflow-hidden shadow-inner mb-3 relative">
+                        <i class="fa-solid fa-user-shield text-stone-400 text-6xl"></i>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 rounded px-2 py-1">
+                            <span class="text-amber-400 font-medieval text-xs font-bold">LVL 1</span>
+                        </div>
+                    </div>
+                    <h3 class="font-medieval text-xl text-stone-800 mb-2 text-center">Iron Knight</h3>
+                    <p class="text-stone-600 text-sm text-center mb-3">Unyielding defender with unbreakable armor</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-heart text-red-500 mr-1"></i>Health</span>
+                            <span class="text-stone-600 font-bold">100</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-red-600 to-red-400" style="width: 100%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-bolt text-yellow-500 mr-1"></i>Speed</span>
+                            <span class="text-stone-600 font-bold">50</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-yellow-600 to-yellow-400" style="width: 50%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-sword text-orange-500 mr-1"></i>Attack</span>
+                            <span class="text-stone-600 font-bold">70</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-orange-600 to-orange-400" style="width: 70%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-shield text-blue-500 mr-1"></i>Defense</span>
+                            <span class="text-stone-600 font-bold">95</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-blue-600 to-blue-400" style="width: 95%"></div></div>
+                    </div>
+                    <div class="mt-3 flex justify-center space-x-1">
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-blue-600">
+                            <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-red-600">
+                            <i class="fa-solid fa-hammer text-red-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-amber-600">
+                            <i class="fa-solid fa-hand-fist text-amber-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="char-3" class="character-card parchment-bg border-carved shadow-medieval p-4 cursor-pointer relative" onclick="selectCharacter(3)">
+                    <div class="absolute top-2 right-2 opacity-0 transition-opacity" id="selected-badge-3">
+                        <div class="bg-amber-600 rounded-full p-2 border-2 border-amber-800">
+                            <i class="fa-solid fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="w-full h-48 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-2 border-stone-600 flex items-center justify-center overflow-hidden shadow-inner mb-3 relative">
+                        <i class="fa-solid fa-hat-wizard text-stone-400 text-6xl"></i>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 rounded px-2 py-1">
+                            <span class="text-amber-400 font-medieval text-xs font-bold">LVL 1</span>
+                        </div>
+                    </div>
+                    <h3 class="font-medieval text-xl text-stone-800 mb-2 text-center">Arcane Mage</h3>
+                    <p class="text-stone-600 text-sm text-center mb-3">Master of elemental magic and ancient spells</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-heart text-red-500 mr-1"></i>Health</span>
+                            <span class="text-stone-600 font-bold">60</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-red-600 to-red-400" style="width: 60%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-bolt text-yellow-500 mr-1"></i>Speed</span>
+                            <span class="text-stone-600 font-bold">65</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-yellow-600 to-yellow-400" style="width: 65%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-wand-magic text-purple-500 mr-1"></i>Magic</span>
+                            <span class="text-stone-600 font-bold">100</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-purple-600 to-purple-400" style="width: 100%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-shield text-blue-500 mr-1"></i>Defense</span>
+                            <span class="text-stone-600 font-bold">40</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-blue-600 to-blue-400" style="width: 40%"></div></div>
+                    </div>
+                    <div class="mt-3 flex justify-center space-x-1">
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-orange-600">
+                            <i class="fa-solid fa-fire text-orange-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-blue-600">
+                            <i class="fa-solid fa-snowflake text-blue-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-purple-600">
+                            <i class="fa-solid fa-bolt text-purple-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="char-4" class="character-card parchment-bg border-carved shadow-medieval p-4 cursor-pointer relative" onclick="selectCharacter(4)">
+                    <div class="absolute top-2 right-2 opacity-0 transition-opacity" id="selected-badge-4">
+                        <div class="bg-amber-600 rounded-full p-2 border-2 border-amber-800">
+                            <i class="fa-solid fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="w-full h-48 bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-2 border-stone-600 flex items-center justify-center overflow-hidden shadow-inner mb-3 relative">
+                        <i class="fa-solid fa-bow-arrow text-stone-400 text-6xl"></i>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 rounded px-2 py-1">
+                            <span class="text-amber-400 font-medieval text-xs font-bold">LVL 1</span>
+                        </div>
+                    </div>
+                    <h3 class="font-medieval text-xl text-stone-800 mb-2 text-center">Forest Ranger</h3>
+                    <p class="text-stone-600 text-sm text-center mb-3">Expert marksman with nature's blessing</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-heart text-red-500 mr-1"></i>Health</span>
+                            <span class="text-stone-600 font-bold">80</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-red-600 to-red-400" style="width: 80%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-bolt text-yellow-500 mr-1"></i>Speed</span>
+                            <span class="text-stone-600 font-bold">85</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-yellow-600 to-yellow-400" style="width: 85%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-crosshairs text-green-500 mr-1"></i>Accuracy</span>
+                            <span class="text-stone-600 font-bold">95</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-green-600 to-green-400" style="width: 95%"></div></div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-700 font-medieval flex items-center"><i class="fa-solid fa-shield text-blue-500 mr-1"></i>Defense</span>
+                            <span class="text-stone-600 font-bold">55</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-fill bg-gradient-to-r from-blue-600 to-blue-400" style="width: 55%"></div></div>
+                    </div>
+                    <div class="mt-3 flex justify-center space-x-1">
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-green-600">
+                            <i class="fa-solid fa-bullseye text-green-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-amber-600">
+                            <i class="fa-solid fa-leaf text-amber-400 text-xs"></i>
+                        </div>
+                        <div class="skill-frame w-8 h-8 rounded-lg flex items-center justify-center border border-teal-600">
+                            <i class="fa-solid fa-paw text-teal-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="character-details-section" class="mb-8">
+            <div class="parchment-bg border-carved shadow-medieval p-6">
+                <h2 class="text-2xl font-medieval font-semibold text-stone-800 mb-4 text-center">Character Background</h2>
+                <div id="character-story" class="text-stone-700 text-center leading-relaxed">
+                    <p class="italic text-stone-500">Select a character to view their story...</p>
+                </div>
+                <div id="character-abilities" class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 opacity-0 transition-opacity">
+                    <div class="skill-frame p-4 rounded-lg">
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-br from-stone-600 to-stone-700 flex items-center justify-center border-2 border-amber-600">
+                                <i id="ability-1-icon" class="fa-solid fa-star text-amber-400 text-xl"></i>
+                            </div>
+                            <h4 id="ability-1-name" class="font-medieval text-amber-200 font-bold mb-1">Ability</h4>
+                            <p id="ability-1-desc" class="text-stone-300 text-xs">Description</p>
+                        </div>
+                    </div>
+                    <div class="skill-frame p-4 rounded-lg">
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-br from-stone-600 to-stone-700 flex items-center justify-center border-2 border-amber-600">
+                                <i id="ability-2-icon" class="fa-solid fa-star text-amber-400 text-xl"></i>
+                            </div>
+                            <h4 id="ability-2-name" class="font-medieval text-amber-200 font-bold mb-1">Ability</h4>
+                            <p id="ability-2-desc" class="text-stone-300 text-xs">Description</p>
+                        </div>
+                    </div>
+                    <div class="skill-frame p-4 rounded-lg">
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-br from-stone-600 to-stone-700 flex items-center justify-center border-2 border-amber-600">
+                                <i id="ability-3-icon" class="fa-solid fa-star text-amber-400 text-xl"></i>
+                            </div>
+                            <h4 id="ability-3-name" class="font-medieval text-amber-200 font-bold mb-1">Ability</h4>
+                            <p id="ability-3-desc" class="text-stone-300 text-xs">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="action-buttons-section" class="flex justify-center space-x-6">
+            <button onclick="window.history.back()" class="bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medieval py-4 px-8 rounded-lg border-2 border-gray-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back
+            </button>
+            <button id="start-button" class="btn-medieval text-amber-100 font-medieval py-4 px-12 rounded-lg shadow-medieval hover:shadow-lg opacity-50 cursor-not-allowed" disabled>
+                <i class="fa-solid fa-play mr-2"></i>Start Journey
+            </button>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-stone-800 text-stone-300 py-8 text-center mt-12">
+        <p class="font-medieval">Medieval UI Asset Pack - Handcrafted Game Interface Elements</p>
+        <p class="text-sm mt-2 text-stone-400">Perfect for RPG, Adventure, and Fantasy Games</p>
+    </footer>
+
+    <script>
+        let selectedCharacter = 0;
+
+        const characterData = {
+            1: {
+                story: "Born in the shadows of the city's underworld, the Shadow Assassin learned the art of stealth and precision from a young age. Silent as the night and twice as deadly, they strike before their enemies even know they're there.",
+                abilities: [
+                    { icon: "fa-eye-slash", name: "Shadow Cloak", desc: "Become invisible for 5 seconds" },
+                    { icon: "fa-dagger", name: "Critical Strike", desc: "Deal 200% damage on next attack" },
+                    { icon: "fa-flask", name: "Poison Blade", desc: "Apply poison that deals damage over time" }
+                ]
+            },
+            2: {
+                story: "Forged in the fires of countless battles, the Iron Knight stands as an immovable bastion against all threats. Their armor has withstood sieges and their will has never wavered. They are the shield that protects the innocent.",
+                abilities: [
+                    { icon: "fa-shield-halved", name: "Iron Wall", desc: "Block all damage for 3 seconds" },
+                    { icon: "fa-hammer", name: "Crushing Blow", desc: "Stun enemies with massive impact" },
+                    { icon: "fa-hand-fist", name: "Taunt", desc: "Force enemies to attack you" }
+                ]
+            },
+            3: {
+                story: "Trained in the ancient towers of

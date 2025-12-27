@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Bag</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      ::-webkit-scrollbar { display: none;}
+      
+      .parchment-bg {
+        background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .shadow-medieval {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .border-carved {
+        border: 3px solid #5a4a3a;
+        position: relative;
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .skill-frame {
+        background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+        border: 3px solid #6b5b4d;
+        border-radius: 16px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+      }
+
+      .btn-medieval {
+        background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+        border: 3px solid #4a3f2a;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        position: relative;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+      }
+
+      .btn-medieval:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+        filter: brightness(1.1);
+      }
+
+      .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .skill-frame:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .cooldown-overlay {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+        backdrop-filter: blur(1px);
+      }
+
+      .cooldown-timer {
+        text-shadow: 0 0 8px rgba(255,255,255,0.8), 0 0 4px rgba(255,255,255,0.6);
+      }
+
+      .skill-bag-counter {
+        background: radial-gradient(circle, #8b7355 0%, #5d4e37 100%);
+        border: 2px solid #4a3f2a;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.2);
+      }
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'medieval': ['Cinzel', 'serif'],
+              'elegant': ['Cormorant Garamond', 'serif']
+            }
+          }
+        }
+      }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 min-h-screen font-elegant">
+
+    <div id="header" class="w-full py-6 text-center">
+        <h1 class="text-4xl font-medieval font-bold text-stone-800 text-shadow">Skill Bag</h1>
+        <p class="text-lg text-stone-600 mt-2 font-elegant">Manage Your Battle Skills</p>
+    </div>
+
+    <div id="main-container" class="max-w-6xl mx-auto px-6 pb-12">
+        
+        <div id="skill-bag-header" class="parchment-bg border-carved shadow-medieval p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center border border-amber-600">
+                        <i class="fa-solid fa-bag-shopping text-amber-400 text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-medieval font-bold text-stone-800">Current Skills</h2>
+                        <p class="text-stone-600 font-elegant">Ready for battle</p>
+                    </div>
+                </div>
+                <div class="skill-bag-counter rounded-full px-6 py-3">
+                    <span class="text-amber-100 text-2xl font-medieval font-bold">11/14</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="available-skills-section" class="mb-12">
+            <h3 class="text-xl font-medieval font-semibold text-stone-800 mb-6 text-center">Available Skills</h3>
+            <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                
+                <div id="skill-fire" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-red-600 hover:border-red-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-fire text-red-400 text-2xl group-hover:text-red-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Fireball
+                    </div>
+                </div>
+
+                <div id="skill-ice" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-blue-600 hover:border-blue-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-snowflake text-blue-400 text-2xl group-hover:text-blue-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Ice Blast
+                    </div>
+                </div>
+
+                <div id="skill-lightning" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-purple-600 hover:border-purple-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-bolt text-purple-400 text-2xl group-hover:text-purple-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Lightning Strike
+                    </div>
+                </div>
+
+                <div id="skill-heal" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-green-600 hover:border-green-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-heart text-green-400 text-2xl group-hover:text-green-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Healing Light
+                    </div>
+                </div>
+
+                <div id="skill-shield" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-shield-halved text-amber-400 text-2xl group-hover:text-amber-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Shield Block
+                    </div>
+                </div>
+
+                <div id="skill-sword" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-red-700 hover:border-red-500 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-sword text-red-500 text-2xl group-hover:text-red-400"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Sword Strike
+                    </div>
+                </div>
+
+                <div id="skill-wind" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-cyan-600 hover:border-cyan-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-wind text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Wind Slash
+                    </div>
+                </div>
+
+                <div id="skill-poison" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-green-700 hover:border-green-500 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-skull text-green-500 text-2xl group-hover:text-green-400"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Poison Cloud
+                    </div>
+                </div>
+
+                <div id="skill-magic" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-violet-600 hover:border-violet-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-wand-magic-sparkles text-violet-400 text-2xl group-hover:text-violet-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Arcane Missile
+                    </div>
+                </div>
+
+                <div id="skill-earth" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-orange-700 hover:border-orange-500 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-mountain text-orange-500 text-2xl group-hover:text-orange-400"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Earth Spike
+                    </div>
+                </div>
+
+                <div id="skill-darkness" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-gray-600 hover:border-gray-400 hover:scale-110 hover:shadow-2xl cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-moon text-gray-400 text-2xl group-hover:text-gray-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Shadow Strike
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="cooldown-skills-section">
+            <h3 class="text-xl font-medieval font-semibold text-stone-800 mb-6 text-center">Skills on Cooldown</h3>
+            <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                
+                <div id="skill-meteor-cd" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-orange-600 opacity-60 cursor-not-allowed transition-all duration-200 group relative">
+                    <i class="fa-solid fa-meteor text-orange-400 text-2xl"></i>
+                    <div class="cooldown-overlay absolute inset-0 rounded-xl flex items-center justify-center">
+                        <span class="cooldown-timer text-white text-lg font-medieval font-bold">3</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Meteor Strike - 3 turns
+                    </div>
+                </div>
+
+                <div id="skill-blizzard-cd" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-blue-700 opacity-60 cursor-not-allowed transition-all duration-200 group relative">
+                    <i class="fa-solid fa-icicles text-blue-500 text-2xl"></i>
+                    <div class="cooldown-overlay absolute inset-0 rounded-xl flex items-center justify-center">
+                        <span class="cooldown-timer text-white text-lg font-medieval font-bold">5</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Blizzard - 5 turns
+                    </div>
+                </div>
+
+                <div id="skill-divine-cd" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-yellow-600 opacity-60 cursor-not-allowed transition-all duration-200 group relative">
+                    <i class="fa-solid fa-sun text-yellow-500 text-2xl"></i>
+                    <div class="cooldown-overlay absolute inset-0 rounded-xl flex items-center justify-center">
+                        <span class="cooldown-timer text-white text-lg font-medieval font-bold">2</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        Divine Light - 2 turns
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="action-buttons" class="flex justify-center space-x-6 mt-12">
+            <button id="close-bag-btn" class="btn-medieval text-amber-100 font-medieval py-3 px-8 rounded-lg shadow-medieval hover:shadow-lg">
+                <i class="fa-solid fa-times mr-2"></i>Close Bag
+            </button>
+            <button id="organize-btn" class="btn-medieval text-amber-100 font-medieval py-3 px-8 rounded-lg shadow-medieval hover:shadow-lg">
+                <i class="fa-solid fa-sort mr-2"></i>Organize
+            </button>
+        </div>
+
+    </div>
+
+    <footer id="footer" class="bg-stone-800 text-stone-300 py-8 text-center">
+        <p class="font-medieval">Medieval UI Asset Pack - Handcrafted Game Interface Elements</p>
+        <p class="text-sm mt-2 text-stone-400">Perfect for RPG, Adventure, and Fantasy Games</p>
+    </footer>
+
+</body>
+</html>

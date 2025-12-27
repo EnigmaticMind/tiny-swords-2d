@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        .parchment-bg {
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+        }
+        .shadow-medieval {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+        }
+        .border-carved {
+            border: 3px solid #5a4a3a;
+            position: relative;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+        }
+        .btn-medieval {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+            border: 3px solid #4a3f2a;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            position: relative;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+        }
+        .btn-medieval::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            border-radius: 12px;
+        }
+        .btn-medieval:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+            filter: brightness(1.1);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .slider-track {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .slider-thumb {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 100%);
+            border: 2px solid #4a3f2a;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+        }
+        .toggle-switch {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 20px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .toggle-switch.active {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 100%);
+        }
+        .toggle-knob {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 100%);
+            border: 2px solid #4a3f2a;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .toggle-switch.active .toggle-knob {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            border-color: #8b6f1f;
+        }
+        .dropdown-select {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: #d4af37;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dropdown-select:hover {
+            border-color: #8b7355;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-track {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+            height: 8px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 100%);
+            border: 2px solid #4a3f2a;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        input[type="range"]::-moz-range-track {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+            height: 8px;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 100%);
+            border: 2px solid #4a3f2a;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .keybind-box {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 2px solid #6b5b4d;
+            border-radius: 6px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+        .keybind-box:hover {
+            border-color: #8b7355;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'medieval': ['Cinzel', 'serif'],
+                        'elegant': ['Cormorant Garamond', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 font-elegant">
+    <div id="header" class="w-full py-6 text-center border-b-4 border-stone-700 bg-gradient-to-b from-stone-800 to-stone-900 shadow-lg">
+        <h1 class="text-4xl font-medieval font-bold text-amber-200 text-shadow">Settings</h1>
+        <p class="text-lg text-stone-400 mt-1 font-elegant">Configure Your Experience</p>
+    </div>
+
+    <div id="main-container" class="max-w-6xl mx-auto px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <aside id="settings-sidebar" class="lg:col-span-1">
+                <nav class="parchment-bg border-carved shadow-medieval p-6 sticky top-8">
+                    <h3 class="font-medieval text-xl text-stone-800 mb-4 border-b-2 border-stone-600 pb-2">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#audio-section" class="flex items-center space-x-3 text-stone-700 hover:text-amber-700 transition-colors py-2 px-3 rounded hover:bg-stone-200 font-medieval"><i class="fa-solid fa-volume-high text-amber-600"></i><span>Audio</span></a></li>
+                        <li><a href="#video-section" class="flex items-center space-x-3 text-stone-700 hover:text-amber-700 transition-colors py-2 px-3 rounded hover:bg-stone-200 font-medieval"><i class="fa-solid fa-display text-blue-600"></i><span>Video</span></a></li>
+                        <li><a href="#gameplay-section" class="flex items-center space-x-3 text-stone-700 hover:text-amber-700 transition-colors py-2 px-3 rounded hover:bg-stone-200 font-medieval"><i class="fa-solid fa-gamepad text-green-600"></i><span>Gameplay</span></a></li>
+                        <li><a href="#controls-section" class="flex items-center space-x-3 text-stone-700 hover:text-amber-700 transition-colors py-2 px-3 rounded hover:bg-stone-200 font-medieval"><i class="fa-solid fa-keyboard text-purple-600"></i><span>Controls</span></a></li>
+                        <li><a href="#interface-section" class="flex items-center space-x-3 text-stone-700 hover:text-amber-700 transition-colors py-2 px-3 rounded hover:bg-stone-200 font-medieval"><i class="fa-solid fa-window-restore text-red-600"></i><span>Interface</span></a></li>
+                    </ul>
+                    <div class="mt-8 pt-6 border-t-2 border-stone-600">
+                        <button class="w-full btn-medieval text-amber-100 font-medieval py-3 px-4 rounded-lg mb-3"><i class="fa-solid fa-floppy-disk mr-2"></i>Save Changes</button>
+                        <button class="w-full bg-stone-600 hover:bg-stone-500 text-stone-100 font-medieval py-3 px-4 rounded-lg border-2 border-stone-700 transition-colors"><i class="fa-solid fa-rotate-left mr-2"></i>Reset Defaults</button>
+                    </div>
+                </nav>
+            </aside>
+
+            <main id="settings-content" class="lg:col-span-3 space-y-8">
+                <section id="audio-section" class="parchment-bg border-carved shadow-medieval p-8">
+                    <div class="flex items-center space-x-3 mb-6 border-b-2 border-stone-600 pb-4">
+                        <i class="fa-solid fa-volume-high text-amber-600 text-2xl"></i>
+                        <h2 class="text-2xl font-medieval font-semibold text-stone-800">Audio Settings</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Master Volume</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="master-volume-value">75%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="75" id="master-volume" class="w-full">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Music Volume</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="music-volume-value">60%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="60" id="music-volume" class="w-full">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Sound Effects</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="sfx-volume-value">80%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="80" id="sfx-volume" class="w-full">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Ambient Sounds</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="ambient-volume-value">50%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="50" id="ambient-volume" class="w-full">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Voice Volume</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="voice-volume-value">70%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="70" id="voice-volume" class="w-full">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t-2 border-stone-300">
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Mute All</label>
+                                <div class="toggle-switch w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-1 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Subtitles</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="video-section" class="parchment-bg border-carved shadow-medieval p-8">
+                    <div class="flex items-center space-x-3 mb-6 border-b-2 border-stone-600 pb-4">
+                        <i class="fa-solid fa-display text-blue-600 text-2xl"></i>
+                        <h2 class="text-2xl font-medieval font-semibold text-stone-800">Video Settings</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="setting-item">
+                            <label class="text-stone-700 font-medieval font-semibold mb-3 block">Resolution</label>
+                            <select class="dropdown-select w-full px-4 py-3 font-medieval">
+                                <option>1920 x 1080 (Full HD)</option>
+                                <option>2560 x 1440 (2K)</option>
+                                <option>3840 x 2160 (4K)</option>
+                                <option>1366 x 768</option>
+                                <option>1280 x 720</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <label class="text-stone-700 font-medieval font-semibold mb-3 block">Display Mode</label>
+                            <select class="dropdown-select w-full px-4 py-3 font-medieval">
+                                <option>Fullscreen</option>
+                                <option>Windowed</option>
+                                <option>Borderless Window</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <label class="text-stone-700 font-medieval font-semibold mb-3 block">Graphics Quality</label>
+                            <select class="dropdown-select w-full px-4 py-3 font-medieval">
+                                <option>Ultra</option>
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Brightness</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="brightness-value">50%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="50" id="brightness" class="w-full">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t-2 border-stone-300">
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">V-Sync</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Anti-Aliasing</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Motion Blur</label>
+                                <div class="toggle-switch w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-1 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Shadows</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="gameplay-section" class="parchment-bg border-carved shadow-medieval p-8">
+                    <div class="flex items-center space-x-3 mb-6 border-b-2 border-stone-600 pb-4">
+                        <i class="fa-solid fa-gamepad text-green-600 text-2xl"></i>
+                        <h2 class="text-2xl font-medieval font-semibold text-stone-800">Gameplay Settings</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="setting-item">
+                            <label class="text-stone-700 font-medieval font-semibold mb-3 block">Difficulty</label>
+                            <select class="dropdown-select w-full px-4 py-3 font-medieval">
+                                <option>Radiant (Easy)</option>
+                                <option>Darkest (Normal)</option>
+                                <option>Stygian (Hard)</option>
+                                <option>Bloodmoon (Very Hard)</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Combat Speed</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="combat-speed-value">Normal</span>
+                            </div>
+                            <input type="range" min="1" max="3" value="2" id="combat-speed" class="w-full">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-stone-700 font-medieval font-semibold">Camera Sensitivity</label>
+                                <span class="text-amber-700 font-medieval font-bold" id="camera-sensitivity-value">50%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="50" id="camera-sensitivity" class="w-full">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t-2 border-stone-300">
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Auto-Save</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Tutorial Tips</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Permadeath</label>
+                                <div class="toggle-switch w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-1 transition-all"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                                <label class="text-stone-700 font-medieval">Critical Hits</label>
+                                <div class="toggle-switch active w-14 h-7 relative" onclick="toggleSwitch(this)">
+                                    <div class="toggle-knob w-5 h-5 absolute top-1 left-7 transition-all"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="controls-section" class="parchment-bg border-carved shadow-medieval p-8">
+                    <div class="flex items-center space-x-3 mb-6 border-b-2 border-stone-600 pb-4">
+                        <i class="fa-solid fa-keyboard text-purple-600 text-2xl"></i>
+                        <h2 class="text-2xl font-medieval font-semibold text-stone-800">Controls & Keybindings</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                            <label class="text-stone-700 font-medieval font-semibold">Move Forward</label>
+                            <div class="keybind-box px-4 py-2 text-amber-200 font-medieval font-bold">W</div>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                            <label class="text-stone-700 font-medieval font-semibold">Move Backward</label>
+                            <div class="keybind-box px-4 py-2 text-amber-200 font-medieval font-bold">S</div>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                            <label class="text-stone-700 font-medieval font-semibold">Move Left</label>
+                            <div class="keybind-box px-4 py-2 text-amber-200 font-medieval font-bold">A</div>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-stone-100 rounded-lg">
+                            <label class="text-stone-700 font-medieval font-semibold">Move Right</label>
+                            <div class="keyb

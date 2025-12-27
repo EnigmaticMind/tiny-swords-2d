@@ -1,0 +1,626 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game UI Asset Pack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.FontAwesomeConfig = {
+      autoReplaceSvg: 'nest'
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    ::-webkit-scrollbar { display: none; }
+
+    body {
+  background: transparent !important;
+}
+
+/* Or for specific elements */
+.capture-element {
+  background: transparent !important;
+}
+
+    .parchment-bg {
+      background: linear-gradient(135deg, #e8e0d0 0%, #e8e0d0 100%);
+    }
+
+    .shadow-medieval {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .shadow-medieval-2 {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .border-carved {
+      border: 2px solid #5a4a3a;
+    }
+
+    .border-carved::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      border: 1px solid rgba(139, 115, 85, 0.3);
+      z-index: -1;
+    }
+
+    .skill-frame {
+      border: 2px solid #6b5b4d;
+      /* 3D effect with gradient overlay */
+      background: linear-gradient(135deg, #e8e0d0 0%, #e8e0d0 100%);
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .skill-frame::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    .hotkey-icon {
+    }
+
+    .hotkey-bg {
+      background: linear-gradient(135deg, #e8e0d0 0%, #e8e0d0 100%);
+    }
+
+    .btn-medieval {
+      background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+      border: 4px solid #4a3f2a;
+      clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .btn-medieval::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+    }
+
+    .btn-medieval:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .frame-octagon {
+      clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
+    }
+
+    .frame-hexagon {
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    }
+
+    .corner-accent {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #8b7355;
+    }
+
+    .corner-accent.top-left {
+      top: -2px;
+      left: -2px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .corner-accent.top-right {
+      top: -2px;
+      right: -2px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .corner-accent.bottom-left {
+      bottom: -2px;
+      left: -2px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .corner-accent.bottom-right {
+      bottom: -2px;
+      right: -2px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .hotkey-border {
+      border: 4px solid #5a4a3a;
+    }
+
+    .hotkey-text {
+      color: #5a4a3a;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'medieval': ['Cinzel', 'serif'],
+            'elegant': ['Cormorant Garamond', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Add this script to convert HTML to SVG -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/0.11.0/dom-to-image.min.js"></script>
+</head>
+
+<body style="border: 0; margin: 0; padding: 0;">
+
+  <!-- Skill Bar -->
+  <div class="rounded-lg max-w-xl mx-auto skill-frame parchment-bg border-carved p-3 mb-8 border-2">
+    <div class="flex justify-center items-center space-x-2">
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">1</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">2</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">3</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">4</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">5</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">6</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">7</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">8</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">9</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs font-medieval hotkey-icon font-bold">0</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Skill Bar Locked -->
+  <div class="rounded-lg max-w-xl mx-auto skill-frame parchment-bg border-carved p-3 mb-8 border-2">
+    <div class="flex justify-center items-center space-x-2">
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">1</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">2</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">3</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">4</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">5</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">6</span>
+        </div>
+      </div>
+      
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">7</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">8</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">9</span>
+        </div>
+      </div>
+
+      <div class="w-12 h-12 rounded-lg border-dashed opacity-40 flex items-center justify-center border-2 hotkey-border hover:hotkey-border hover:scale-110 cursor-pointer transition-all group relative">
+        <i class="text-stone-500 text-l" data-fa-i2svg=""><svg class="svg-inline--fa fa-lock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg></i>
+
+        <div class="absolute -top-2 -right-2 w-5 h-5 hotkey-bg rounded-full border-2 hotkey-border flex items-center justify-center">
+          <span class="hotkey-text text-xs  font-medieval hotkey-icon font-bold">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-3 mb-8 mx-auto max-w-xl">
+    <!-- Title -->
+    <div class="rounded-lg  max-w-xl w-48 mx-auto skill-frame parchment-bg border-carved p-3 border-2">
+      <div class="flex items-start space-x-4">
+        <div class="flex-1">
+          <h3 class="font-medieval text-2xl text-stone-800">&nbsp;</h3>
+          <!-- <div class="flex items-center space-x-4 text-sm">
+            <span class="text-red-600 font-medieval"><i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-wand-magic-sparkles" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wand-magic-sparkles" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"></path></svg></i>15 Mana</span>
+            <span class="text-blue-600 font-medieval"><i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"></path></svg></i>2s Cooldown</span>
+          </div> -->
+        </div>
+      </div>
+      <div class="border-t-2 border-stone-400">
+        <h3 class="font-medieval text-2xl text-stone-800">&nbsp;</h3>
+        <!-- <p class="text-stone-700 leading-relaxed">&nbsp;</p> -->
+        <!-- <p class="text-stone-700 leading-relaxed mb-3">Launch a blazing sphere of fire that deals devastating damage to enemies. The flames persist for a short duration, causing additional burn damage.</p> -->
+        <!-- <div class="grid grid-cols-2 gap-3">
+          <div class="bg-stone-200 rounded p-2">
+            <div class="text-xs text-stone-600 font-medieval">Damage</div>
+            <div class="text-lg font-medieval font-bold text-red-700">65-85</div>
+          </div>
+          <div class="bg-stone-200 rounded p-2">
+            <div class="text-xs text-stone-600 font-medieval">Burn Duration</div>
+            <div class="text-lg font-medieval font-bold text-orange-700">3s</div>
+          </div>
+          <div class="bg-stone-200 rounded p-2">
+            <div class="text-xs text-stone-600 font-medieval">Range</div>
+            <div class="text-lg font-medieval font-bold text-amber-700">15m</div>
+          </div>
+          <div class="bg-stone-200 rounded p-2">
+            <div class="text-xs text-stone-600 font-medieval">Area Effect</div>
+            <div class="text-lg font-medieval font-bold text-yellow-700">3m</div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip No Title -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-3 mb-8 mx-auto max-w-xl">
+    <!-- Title -->
+    <div class="rounded-lg  max-w-xl w-48 mx-auto skill-frame parchment-bg border-carved p-3 border-2">
+      <div class="flex items-start space-x-4">
+        <div class="flex-1">
+          <h3 class="font-medieval text-2xl text-stone-800">&nbsp;</h3>
+          <!-- <div class="flex items-center space-x-4 text-sm">
+            <span class="text-red-600 font-medieval"><i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-wand-magic-sparkles" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wand-magic-sparkles" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"></path></svg></i>15 Mana</span>
+            <span class="text-blue-600 font-medieval"><i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"></path></svg></i>2s Cooldown</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Settings -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-3 mb-8 mx-auto max-w-xl">
+  <button class="rounded-lg  max-w-xl mx-auto skill-frame hover:skill-frame-hover parchment-bg border-carved p-1 pl-2 pr-2 border-2">
+    <i class="" data-fa-i2svg="">
+    <svg class="svg-inline--fa fa-gear" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gear" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"></path></svg></i>
+    <!-- <span class="font-medieval text-md text-stone-800">Settings</span> -->
+  </button>
+  </div>
+
+  <!-- Menu -->
+  <div id="menu-container" class="rounded-lg  max-w-xl w-48 mx-auto skill-frame parchment-bg border-carved p-3 border-2">
+
+    <!-- <div id="menu-buttons" class="space-y-4">
+        <button id="resume-btn" class="w-full btn-medieval text-amber-100 font-medieval py-4 px-6 rounded-lg shadow-medieval hover:shadow-lg text-lg font-semibold">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-play" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></i>Resume Game
+        </button>
+        
+        <button id="save-btn" class="w-full bg-gradient-to-r from-blue-700 to-blue-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-blue-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-floppy-disk" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="floppy-disk" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path></svg></i>Save Progress
+        </button>
+        
+        <button id="settings-btn" class="w-full bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-gray-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-gear" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gear" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"></path></svg></i>Settings
+        </button>
+        
+        <button id="inventory-btn" class="w-full bg-gradient-to-r from-amber-700 to-amber-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-amber-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-bag-shopping" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bag-shopping" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"></path></svg></i>Inventory
+        </button>
+    </div> -->
+
+    <div id="menu-divider" class="my-6 relative">
+        <div class="h-px bg-gradient-to-r from-transparent via-stone-400 to-transparent"></div>
+    </div>
+
+    <!-- <div id="danger-buttons" class="space-y-3">
+        <button id="main-menu-btn" class="w-full bg-gradient-to-r from-orange-700 to-orange-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-orange-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg></i>Main Menu
+        </button>
+        
+        <button id="exit-btn" class="w-full bg-gradient-to-r from-red-700 to-red-600 text-white font-medieval py-3 px-6 rounded-lg border-2 border-red-900 shadow-medieval hover:shadow-lg hover:-translate-y-1 transition-all">
+            <i class="mr-3" data-fa-i2svg=""><svg class="svg-inline--fa fa-door-open" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="door-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5V448H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 288h32V480 32zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128h96V480c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H512V128c0-35.3-28.7-64-64-64H352v64z"></path></svg></i>Exit Game
+        </button>
+    </div>
+
+    <div id="menu-footer" class="mt-8 text-center">
+        <div class="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+        <div class="flex justify-center space-x-6 mt-4">
+            <div class="text-center">
+                <div class="skill-frame w-10 h-10 rounded-lg flex items-center justify-center border border-amber-600">
+                    <i class="text-amber-400" data-fa-i2svg=""><svg class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"></path></svg></i>
+                </div>
+                <span class="text-stone-600 text-xs font-medieval mt-1 block">2:45:12</span>
+            </div>
+            <div class="text-center">
+                <div class="skill-frame w-10 h-10 rounded-lg flex items-center justify-center border border-yellow-600">
+                    <i class="text-yellow-400" data-fa-i2svg=""><svg class="svg-inline--fa fa-coins" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="coins" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M512 80c0 18-14.3 34.6-38.4 48c-29.1 16.1-72.5 27.5-122.3 30.9c-3.7-1.8-7.4-3.5-11.3-5C300.6 137.4 248.2 128 192 128c-8.3 0-16.4 .2-24.5 .6l-1.1-.6C142.3 114.6 128 98 128 80c0-44.2 86-80 192-80S512 35.8 512 80zM160.7 161.1c10.2-.7 20.7-1.1 31.3-1.1c62.2 0 117.4 12.3 152.5 31.4C369.3 204.9 384 221.7 384 240c0 4-.7 7.9-2.1 11.7c-4.6 13.2-17 25.3-35 35.5c0 0 0 0 0 0c-.1 .1-.3 .1-.4 .2l0 0 0 0c-.3 .2-.6 .3-.9 .5c-35 19.4-90.8 32-153.6 32c-59.6 0-112.9-11.3-148.2-29.1c-1.9-.9-3.7-1.9-5.5-2.9C14.3 274.6 0 258 0 240c0-34.8 53.4-64.5 128-75.4c10.5-1.5 21.4-2.7 32.7-3.5zM416 240c0-21.9-10.6-39.9-24.1-53.4c28.3-4.4 54.2-11.4 76.2-20.5c16.3-6.8 31.5-15.2 43.9-25.5V176c0 19.3-16.5 37.1-43.8 50.9c-14.6 7.4-32.4 13.7-52.4 18.5c.1-1.8 .2-3.5 .2-5.3zm-32 96c0 18-14.3 34.6-38.4 48c-1.8 1-3.6 1.9-5.5 2.9C304.9 404.7 251.6 416 192 416c-62.8 0-118.6-12.6-153.6-32C14.3 370.6 0 354 0 336V300.6c12.5 10.3 27.6 18.7 43.9 25.5C83.4 342.6 135.8 352 192 352s108.6-9.4 148.1-25.9c7.8-3.2 15.3-6.9 22.4-10.9c6.1-3.4 11.8-7.2 17.2-11.2c1.5-1.1 2.9-2.3 4.3-3.4V304v5.7V336zm32 0V304 278.1c19-4.2 36.5-9.5 52.1-16c16.3-6.8 31.5-15.2 43.9-25.5V272c0 10.5-5 21-14.9 30.9c-16.3 16.3-45 29.7-81.3 38.4c.1-1.7 .2-3.5 .2-5.3zM192 448c56.2 0 108.6-9.4 148.1-25.9c16.3-6.8 31.5-15.2 43.9-25.5V432c0 44.2-86 80-192 80S0 476.2 0 432V396.6c12.5 10.3 27.6 18.7 43.9 25.5C83.4 438.6 135.8 448 192 448z"></path></svg></i>
+                </div>
+                <span class="text-stone-600 text-xs font-medieval mt-1 block">1,250</span>
+            </div>
+            <div class="text-center">
+                <div class="skill-frame w-10 h-10 rounded-lg flex items-center justify-center border border-purple-600">
+                    <i class="text-purple-400" data-fa-i2svg=""><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></i>
+                </div>
+                <span class="text-stone-600 text-xs font-medieval mt-1 block">Level 12</span>
+            </div>
+        </div>
+    </div> -->
+
+    <div id="corner-decorations" class="absolute">
+        <div class="absolute top-2 left-2 w-6 h-6 border-t-3 border-l-3 border-amber-700 rounded-tl-lg"></div>
+        <div class="absolute top-2 right-2 w-6 h-6 border-t-3 border-r-3 border-amber-700 rounded-tr-lg"></div>
+        <div class="absolute bottom-2 left-2 w-6 h-6 border-b-3 border-l-3 border-amber-700 rounded-bl-lg"></div>
+        <div class="absolute bottom-2 right-2 w-6 h-6 border-b-3 border-r-3 border-amber-700 rounded-br-lg"></div>
+    </div>
+</div>
+
+  <!-- Buttons -->
+   <div class="mt-10 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6 text-lg">
+    <!-- Resume -->
+    <button id="exit-btn" class="shadow-medieval-2 w-full bg-gradient-to-r from-green-700 to-green-600 text-white font-medieval py-2 px-3 rounded-lg border-2 border-green-800  transition-all">
+      <i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-door-open" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="door-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5V448H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 288h32V480 32zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128h96V480c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H512V128c0-35.3-28.7-64-64-64H352v64z"></path></svg></i>
+      Resume
+    </button>
+
+    <!-- Restart -->
+    <button id="exit-btn" class="shadow-medieval-2 w-full bg-gradient-to-r from-yellow-700 to-yellow-600 text-white font-medieval py-2 px-3 rounded-lg border-2 border-yellow-700  transition-all">
+      <i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-arrow-rotate-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-rotate-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M125.7 160H176c17.7 0 32 14.3 32 32s-14.3 32-32 32H48c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32s32 14.3 32 32v51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z"></path></svg></i>      Restart
+    </button>
+
+    <!-- Exit -->
+    <button id="exit-btn" class="shadow-medieval-2 w-full bg-gradient-to-r from-red-700 to-red-600 text-white font-medieval py-2 px-3 rounded-lg border-2 border-red-800  transition-all">
+      <i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-door-open" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="door-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5V448H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 288h32V480 32zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128h96V480c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H512V128c0-35.3-28.7-64-64-64H352v64z"></path></svg></i>
+      Exit
+    </button>
+
+    <!-- Confirm -->
+    <button id="exit-btn" class="shadow-medieval-2 w-full bg-gradient-to-r from-emerald-700 to-emerald-600 text-white font-medieval py-2 px-3 rounded-lg border-2 border-emerald-800  transition-all">
+      <i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg></i>      Confirm
+    </button>
+
+    <!-- Cancel -->
+    <button id="exit-btn" class="shadow-medieval-2 w-full bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medieval py-2 px-3 rounded-lg border-2 border-gray-800  transition-all">
+      <i class="mr-1" data-fa-i2svg=""><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg></i>      Cancel
+    </button>
+  </div>
+
+  <script>
+    function captureElementAsPNG(element, filename) {
+      if (!element) {
+        console.error('Element not found');
+        return;
+      }
+      
+      // Wait for fonts to load
+      document.fonts.ready.then(() => {
+        // Small delay to ensure rendering is complete
+        setTimeout(() => {
+          domtoimage.toPng(element, {
+            quality: 1.0,
+            bgcolor: null,
+            scale: 2,
+            cacheBust: true,
+            imagePlaceholder: null // Don't use placeholder images
+          }).then(function(dataUrl) {
+            const link = document.createElement('a');
+            link.download = filename || 'screenshot.png';
+            link.href = dataUrl;
+            link.click();
+            console.log(`Captured: ${filename}`);
+          }).catch(function(error) {
+            console.error('Capture failed:', error);
+          });
+        }, 100); // Small delay for rendering
+      });
+    }
+    
+    // Right-click to capture
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      let target = e.target;
+      while (target && target !== document.body) {
+        if (target.hasAttribute('data-capture') || target.classList.length > 0) {
+          const dataName = target.getAttribute('data-capture');
+          const className = target.className || 'element';
+          const filename = (dataName || className.toString().replace(/\s+/g, '-').substring(0, 30)) + '.png';
+          captureElementAsPNG(target, filename);
+          break;
+        }
+        target = target.parentElement;
+      }
+    });
+  </script>
+
+  <script>
+    function exportToSVG(element, filename) {
+      if (!element) {
+        console.error('Element not found');
+        return;
+      }
+      
+      // Wait for fonts to load
+      document.fonts.ready.then(() => {
+        setTimeout(() => {
+          domtoimage.toSvg(element, {
+            quality: 1.0,
+            bgcolor: null,
+            scale: 2,
+            cacheBust: true,
+            imagePlaceholder: null
+          }).then(function(dataUrl) {
+            const link = document.createElement('a');
+            link.download = filename || 'export.svg';
+            link.href = dataUrl;
+            link.click();
+            console.log(`Exported SVG: ${filename}`);
+          }).catch(function(error) {
+            console.error('SVG export failed:', error);
+          });
+        }, 100);
+      });
+    }
+    
+    // Right-click to capture PNG, Shift+Right-click for SVG
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      let target = e.target;
+      while (target && target !== document.body) {
+        if (target.hasAttribute('data-capture') || target.classList.length > 0) {
+          const dataName = target.getAttribute('data-capture');
+          const className = target.className || 'element';
+          const baseName = (dataName || className.toString().replace(/\s+/g, '-').substring(0, 30));
+          
+          if (e.shiftKey) {
+            // Shift+Right-click = SVG
+            exportToSVG(target, baseName + '.svg');
+          } else {
+            // Regular Right-click = PNG
+            captureElementAsPNG(target, baseName + '.png');
+          }
+          break;
+        }
+        target = target.parentElement;
+      }
+    });
+    
+    // Add capture buttons to elements with data-capture attribute
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[data-capture]').forEach(element => {
+        const container = document.createElement('div');
+        container.style.cssText = 'position: absolute; top: 5px; right: 5px; z-index: 9999; display: flex; gap: 5px;';
+        
+        // PNG button
+        const pngBtn = document.createElement('button');
+        pngBtn.textContent = '📷';
+        pngBtn.title = 'Export as PNG';
+        pngBtn.style.cssText = 'background: rgba(0,0,0,0.7); color: white; border: none; padding: 5px 8px; border-radius: 3px; cursor: pointer; font-size: 12px;';
+        pngBtn.onclick = (e) => {
+          e.stopPropagation();
+          const filename = element.getAttribute('data-capture') + '.png';
+          captureElementAsPNG(element, filename);
+        };
+        
+        // SVG button
+        const svgBtn = document.createElement('button');
+        svgBtn.textContent = '📐';
+        svgBtn.title = 'Export as SVG';
+        svgBtn.style.cssText = 'background: rgba(0,0,0,0.7); color: white; border: none; padding: 5px 8px; border-radius: 3px; cursor: pointer; font-size: 12px;';
+        svgBtn.onclick = (e) => {
+          e.stopPropagation();
+          const filename = element.getAttribute('data-capture') + '.svg';
+          exportToSVG(element, filename);
+        };
+        
+        container.appendChild(pngBtn);
+        container.appendChild(svgBtn);
+        
+        if (getComputedStyle(element).position === 'static') {
+          element.style.position = 'relative';
+        }
+        element.appendChild(container);
+      });
+    });
+  </script>
+</body></html>

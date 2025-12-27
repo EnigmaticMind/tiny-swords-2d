@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <style>
+      .parchment-bg {
+        background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+        box-shadow:
+          0 4px 8px rgba(0, 0, 0, 0.15),
+          0 2px 4px rgba(0, 0, 0, 0.1),
+          inset 0 2px 4px rgba(255, 255, 255, 0.4),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .shadow-medieval {
+        box-shadow:
+          0 6px 12px rgba(0, 0, 0, 0.2),
+          0 3px 6px rgba(0, 0, 0, 0.15),
+          inset 0 2px 4px rgba(255, 255, 255, 0.2),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .border-carved {
+        border: 3px solid #5a4a3a;
+        position: relative;
+        box-shadow:
+          inset 0 3px 6px rgba(0, 0, 0, 0.25),
+          inset 0 -2px 4px rgba(255, 255, 255, 0.15),
+          0 4px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+      }
+
+      .skill-frame {
+        background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+        border: 3px solid #6b5b4d;
+        border-radius: 16px;
+        box-shadow:
+          0 6px 12px rgba(0, 0, 0, 0.35),
+          0 3px 6px rgba(0, 0, 0, 0.25),
+          inset 0 2px 4px rgba(255, 255, 255, 0.15),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+      }
+
+      .btn-medieval {
+        background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+        border: 3px solid #4a3f2a;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        position: relative;
+        box-shadow:
+          0 6px 12px rgba(0, 0, 0, 0.35),
+          0 3px 6px rgba(0, 0, 0, 0.25),
+          inset 0 2px 4px rgba(255, 255, 255, 0.25),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+      }
+
+      .text-shadow {
+        text-shadow:
+          2px 2px 4px rgba(0, 0, 0, 0.7),
+          1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .skill-cooldown {
+        background: linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 100%);
+        border: 3px solid #666;
+        opacity: 0.6;
+        position: relative;
+      }
+
+      .cooldown-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 100%);
+        border-radius: 13px;
+        animation: cooldownPulse 2s infinite;
+      }
+
+      @keyframes cooldownPulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
+      }
+
+      .cooldown-timer {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #ff6b6b;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 1px 3px;
+        border-radius: 4px;
+        border: 1px solid #ff4444;
+      }
+
+      .skill-bag {
+        background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+        border: 3px solid #5d4037;
+        box-shadow: 
+          0 8px 16px rgba(0, 0, 0, 0.4),
+          0 4px 8px rgba(0, 0, 0, 0.3),
+          inset 0 2px 4px rgba(255, 255, 255, 0.2);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'medieval': ['Cinzel', 'serif'],
+              'elegant': ['Cormorant Garamond', 'serif']
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 min-h-screen font-elegant">
+    
+    <div id="header" class="w-full py-6 text-center border-b-4 border-stone-600 bg-gradient-to-r from-stone-800 to-stone-700 shadow-medieval">
+        <h1 class="text-4xl font-medieval font-bold text-amber-100 text-shadow">Skill Bag</h1>
+        <p class="text-lg text-stone-300 mt-1 font-elegant">Manage Your Combat Abilities</p>
+    </div>
+
+    <div id="skill-bag-interface" class="max-w-7xl mx-auto px-6 py-8">
+        
+        <div id="skill-bag-header" class="flex items-center justify-between mb-8 parchment-bg border-carved shadow-medieval p-6">
+            <div class="flex items-center space-x-4">
+                <div class="skill-bag w-16 h-16 rounded-xl flex items-center justify-center relative">
+                    <i class="fa-solid fa-sack text-amber-100 text-3xl"></i>
+                    <div class="absolute -top-2 -right-2 bg-amber-600 text-white px-2 py-1 rounded-full border-2 border-stone-800">
+                        <span class="text-sm font-medieval font-bold">11/14</span>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-medieval font-bold text-stone-800">Skills Available</h2>
+                    <p class="text-stone-600 font-elegant">Ready for battle deployment</p>
+                </div>
+            </div>
+            <button id="close-skill-bag" class="btn-medieval text-amber-100 font-medieval py-2 px-6 rounded-lg">
+                <i class="fa-solid fa-xmark mr-2"></i>Close
+            </button>
+        </div>
+
+        <div id="skills-grid-section" class="mb-12">
+            <h3 class="text-2xl font-medieval font-semibold text-stone-800 mb-6 text-center">Active Skills</h3>
+            <div class="grid grid-cols-5 md:grid-cols-7 lg:grid-cols-11 gap-4 max-w-6xl mx-auto">
+                
+                <div id="skill-fire" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-red-600 hover:border-red-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-fire text-red-400 text-2xl group-hover:text-red-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Fireball</div>
+                </div>
+
+                <div id="skill-ice" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-blue-600 hover:border-blue-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-snowflake text-blue-400 text-2xl group-hover:text-blue-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Ice Blast</div>
+                </div>
+
+                <div id="skill-lightning" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-purple-600 hover:border-purple-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-bolt text-purple-400 text-2xl group-hover:text-purple-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Lightning Strike</div>
+                </div>
+
+                <div id="skill-heal" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-green-600 hover:border-green-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-heart text-green-400 text-2xl group-hover:text-green-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Healing Light</div>
+                </div>
+
+                <div id="skill-shield" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-amber-600 hover:border-amber-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-shield text-amber-400 text-2xl group-hover:text-amber-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Divine Shield</div>
+                </div>
+
+                <div id="skill-sword" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-orange-600 hover:border-orange-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-sword text-orange-400 text-2xl group-hover:text-orange-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Blade Strike</div>
+                </div>
+
+                <div id="skill-wind" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-cyan-600 hover:border-cyan-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-wind text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Wind Slash</div>
+                </div>
+
+                <div id="skill-earth" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-yellow-600 hover:border-yellow-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-mountain text-yellow-400 text-2xl group-hover:text-yellow-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Earth Spike</div>
+                </div>
+
+                <div id="skill-poison" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-emerald-600 hover:border-emerald-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-flask text-emerald-400 text-2xl group-hover:text-emerald-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Poison Cloud</div>
+                </div>
+
+                <div id="skill-arrow" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-rose-600 hover:border-rose-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-bow-arrow text-rose-400 text-2xl group-hover:text-rose-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Power Shot</div>
+                </div>
+
+                <div id="skill-magic" class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-violet-600 hover:border-violet-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-wand-magic text-violet-400 text-2xl group-hover:text-violet-300"></i>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-amber-100 px-3 py-1 rounded text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">Arcane Missile</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="cooldown-section" class="mb-8">
+            <h3 class="text-2xl font-medieval font-semibold text-stone-800 mb-6 text-center">Skills on Cooldown</h3>
+            <div class="parchment-bg border-carved shadow-medieval p-6">
+                <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-4 max-w-4xl mx-auto">
+                    
+                    <div id="skill-meteor-cd" class="skill-cooldown w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-gray-500 cursor-not-allowed relative">
+                        <i class="fa-solid fa-meteor text-gray-400 text-2xl"></i>
+                        <div class="cooldown-overlay"></div>
+                        <div class="cooldown-timer">5</div>
+                        <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-red-300 px-3 py-1 rounded text-xs font-medieval whitespace-nowrap">Meteor Storm - 5 turns</div>
+                    </div>
+
+                    <div id="skill-blizzard-cd" class="skill-cooldown w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-gray-500 cursor-not-allowed relative">
+                        <i class="fa-solid fa-snowflake text-gray-400 text-2xl"></i>
+                        <div class="cooldown-overlay"></div>
+                        <div class="cooldown-timer">3</div>
+                        <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-red-300 px-3 py-1 rounded text-xs font-medieval whitespace-nowrap">Blizzard - 3 turns</div>
+                    </div>
+
+                    <div id="skill-earthquake-cd" class="skill-cooldown w-20 h-20 rounded-xl flex items-center justify-center shadow-medieval border-2 border-gray-500 cursor-not-allowed relative">
+                        <i class="fa-solid fa-mountain text-gray-400 text-2xl"></i>
+                        <div class="cooldown-overlay"></div>
+                        <div class="cooldown-timer">7</div>
+                        <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-800 text-red-300 px-3 py-1 rounded text-xs font-medieval whitespace-nowrap">Earthquake - 7 turns</div>
+                    </div>
+
+                </div>
+                
+                <div class="text-center mt-6">
+                    <p class="text-stone-600 font-elegant text-lg">These powerful skills will return to your bag after their cooldown periods expire.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="skill-management-section" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div id="skill-stats-panel" class="parchment-bg border-carved shadow-medieval p-6">
+                <h4 class="text-xl font-medieval font-bold text-stone-800 mb-4 text-center">Skill Statistics</h4>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-stone-700 font-medieval">Total Skills Collected:</span>
+                        <span class="text-stone-800 font-medieval font-bold">14</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-stone-700 font-medieval">Skills in Bag:</span>
+                        <span class="text-green-600 font-medieval font-bold">11</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-stone-700 font-medieval">Skills on Cooldown:</span>
+                        <span class="text-red-600 font-medieval font-bold">3</span>
+                    </div>
+                    <div class="w-full bg-stone-800 rounded-full h-3 mt-4">
+                        <div class="bg-gradient-to-r from-green-600 to-green-400 h-full rounded-full" style="width: 78.5%"></div>
+                    </div>
+                    <div class="text-center text-stone-600 font-medieval text-sm">Bag Capacity: 78.5%</div>
+                </div>
+            </div>
+
+            <div id="skill-actions-panel" class="parchment-bg border-carved shadow-medieval p-6">
+                <h4 class="text-xl font-medieval font-bold text-stone-800 mb-4 text-center">Quick Actions</h4>
+                <div class="space-y-3">
+                    <button class="w-full btn-medieval text-amber-100 font-medieval py-3 px-4 rounded-lg">
+                        <i class="fa-solid fa-shuffle mr-2"></i>Shuffle Skills
+                    </button>
+                    <button class="w-full btn-medieval text-amber-100 font-medieval py-3 px-4 rounded-lg">
+                        <i class="fa-solid fa-clock mr-2"></i>View Cooldown History
+                    </button>
+                    <button class="w-full btn-medieval text-amber-100 font-medieval py-3 px-4 rounded-lg">
+                        <i class="fa-solid fa-star mr-2"></i>Upgrade Skills
+                    </button>
+                    <button class="w-full bg-red-700 hover:bg-red-600 text-white font-medieval py-3 px-4 rounded-lg border-2 border-red-900 transition-colors">
+                        <i class="fa-solid fa-trash mr-2"></i>Remove Skill
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="footer" class="bg-stone-800 text-stone-300 py-6 text-center border-t-4 border-stone-600 mt-12">
+        <p class="font-medieval">Skill Management System - Master Your Arsenal</p>
+        <p class="text-sm mt-1 text-stone-400">Strategic Combat Preparation Interface</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cooldownSkills = document.querySelectorAll('.skill-cooldown');
+            
+            cooldownSkills.forEach(skill => {
+                const timer = skill.querySelector('.cooldown-timer');
+                if (timer) {
+                    let timeLeft = parseInt(timer.textContent);
+                    
+                    setInterval(() => {
+                        if (timeLeft > 0) {
+                            timeLeft--;
+                            timer.textContent = timeLeft;
+                            
+                            if (timeLeft === 0) {
+                                skill.classList.remove('skill-cooldown');
+                                skill.classList.add('skill-frame');
+                                skill.querySelector('.cooldown-overlay').remove();
+                                timer.remove();
+                                
+                                const icon = skill.querySelector('i');
+                                icon.classList.remove('text-gray-400');
+                                icon.classList.add('text-green-400');
+                                
+                                const notification = document.createElement('div');
+                                notification.className = 'absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-2 py-1 rounded text-xs font-bold animate-bounce';
+                                notification.textContent = 'Ready!';
+                                skill.appendChild(notification);
+                                
+                                setTimeout(() => {
+                                    notification.remove();
+                                }, 3000);
+                            }
+                        }
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

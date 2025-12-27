@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>window.FontAwesomeConfig = {autoReplaceSvg: 'nest'};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+::-webkit-scrollbar{display:none;}
+.parchment-bg{background:linear-gradient(135deg,#f4f1e8 0%,#e8e0d0 100%);box-shadow:0 4px 8px rgba(0,0,0,0.15),0 2px 4px rgba(0,0,0,0.1),inset 0 2px 4px rgba(255,255,255,0.4),inset 0 -3px 6px rgba(0,0,0,0.15);border-radius:12px;}
+.shadow-medieval{box-shadow:0 6px 12px rgba(0,0,0,0.2),0 3px 6px rgba(0,0,0,0.15),inset 0 2px 4px rgba(255,255,255,0.2),inset 0 -3px 6px rgba(0,0,0,0.15);border-radius:12px;}
+.border-carved{border:3px solid #5a4a3a;position:relative;box-shadow:inset 0 3px 6px rgba(0,0,0,0.25),inset 0 -2px 4px rgba(255,255,255,0.15),0 4px 8px rgba(0,0,0,0.15);border-radius:12px;}
+.skill-frame{background:linear-gradient(135deg,#3a3230 0%,#2a2220 100%);border:3px solid #6b5b4d;border-radius:16px;box-shadow:0 6px 12px rgba(0,0,0,0.35),0 3px 6px rgba(0,0,0,0.25),inset 0 2px 4px rgba(255,255,255,0.15),inset 0 -3px 6px rgba(0,0,0,0.35);}
+.btn-medieval{background:linear-gradient(135deg,#8b7355 0%,#6b5b4d 50%,#5d4e37 100%);border:3px solid #4a3f2a;border-radius:12px;transition:all 0.2s ease;position:relative;box-shadow:0 6px 12px rgba(0,0,0,0.35),0 3px 6px rgba(0,0,0,0.25),inset 0 2px 4px rgba(255,255,255,0.25),inset 0 -3px 6px rgba(0,0,0,0.25);}
+.btn-medieval::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 50%);border-radius:12px;}
+.btn-medieval:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.4),0 4px 8px rgba(0,0,0,0.3),inset 0 2px 4px rgba(255,255,255,0.3),inset 0 -3px 6px rgba(0,0,0,0.2);filter:brightness(1.1);}
+.text-shadow{text-shadow:2px 2px 4px rgba(0,0,0,0.7),1px 1px 2px rgba(0,0,0,0.5);}
+.item-slot{background:linear-gradient(135deg,#3a3230 0%,#2a2220 100%);border:2px solid #6b5b4d;border-radius:8px;box-shadow:inset 0 2px 4px rgba(0,0,0,0.4),0 2px 4px rgba(0,0,0,0.2);transition:all 0.2s ease;cursor:pointer;}
+.item-slot:hover{border-color:#8b7355;box-shadow:inset 0 2px 4px rgba(0,0,0,0.3),0 4px 8px rgba(0,0,0,0.3);transform:translateY(-2px);}
+.item-slot.equipped{border:2px solid #d97706;box-shadow:0 0 12px rgba(217,119,6,0.4),inset 0 2px 4px rgba(0,0,0,0.3);}
+.rarity-common{border-color:#9ca3af;}
+.rarity-uncommon{border-color:#10b981;}
+.rarity-rare{border-color:#3b82f6;}
+.rarity-epic{border-color:#a855f7;}
+.rarity-legendary{border-color:#f59e0b;}
+</style>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{'medieval':['Cinzel','serif'],'elegant':['Cormorant Garamond','serif']}}}}
+</script>
+</head>
+<body class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 min-h-screen font-elegant">
+
+<header id="header" class="bg-gradient-to-r from-stone-800 to-stone-900 border-b-4 border-amber-700 shadow-lg">
+<div class="max-w-7xl mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<i class="fa-solid fa-dungeon text-amber-500 text-3xl"></i>
+<h1 class="text-2xl font-medieval font-bold text-amber-200 text-shadow">Darkest Dungeon</h1>
+</div>
+<nav class="flex space-x-2">
+<button class="btn-medieval text-amber-100 font-medieval py-2 px-4 text-sm"><i class="fa-solid fa-home mr-2"></i>Menu</button>
+<button class="bg-stone-700 hover:bg-stone-600 text-amber-100 font-medieval py-2 px-4 rounded border-2 border-stone-600 transition-all text-sm"><i class="fa-solid fa-gamepad mr-2"></i>Play</button>
+<button class="bg-stone-700 hover:bg-stone-600 text-amber-100 font-medieval py-2 px-4 rounded border-2 border-stone-600 transition-all text-sm"><i class="fa-solid fa-gear mr-2"></i>Settings</button>
+</nav>
+</div>
+</div>
+</header>
+
+<main id="main-content" class="max-w-7xl mx-auto px-6 py-8">
+
+<div id="inventory-header" class="mb-6">
+<div class="parchment-bg border-carved shadow-medieval p-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-3xl font-medieval font-bold text-stone-800 mb-2">Inventory & Equipment</h2>
+<p class="text-stone-600 font-elegant">Manage your collected items, equipment, and resources</p>
+</div>
+<div class="flex items-center space-x-6">
+<div class="text-center">
+<i class="fa-solid fa-coins text-yellow-600 text-2xl"></i>
+<div class="text-stone-800 font-medieval font-bold text-lg">2,450</div>
+<div class="text-stone-600 text-xs">Gold</div>
+</div>
+<div class="text-center">
+<i class="fa-solid fa-gem text-emerald-600 text-2xl"></i>
+<div class="text-stone-800 font-medieval font-bold text-lg">18</div>
+<div class="text-stone-600 text-xs">Gems</div>
+</div>
+<div class="text-center">
+<i class="fa-solid fa-weight-hanging text-amber-700 text-2xl"></i>
+<div class="text-stone-800 font-medieval font-bold text-lg">145/200</div>
+<div class="text-stone-600 text-xs">Weight</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="inventory-layout" class="grid grid-cols-12 gap-6">
+
+<div id="character-panel" class="col-span-3">
+<div class="parchment-bg border-carved shadow-medieval p-4 mb-4">
+<div class="text-center mb-4">
+<div class="w-32 h-32 mx-auto bg-gradient-to-b from-stone-700 to-stone-800 rounded-lg border-4 border-amber-700 flex items-center justify-center shadow-lg mb-3">
+<i class="fa-solid fa-user-ninja text-stone-400 text-5xl"></i>
+</div>
+<h3 class="font-medieval text-xl text-stone-800 font-bold">Shadow Blade</h3>
+<p class="text-stone-600 text-sm">Level 12 Assassin</p>
+</div>
+
+<div class="space-y-3">
+<div>
+<div class="flex justify-between text-xs text-stone-600 mb-1">
+<span class="font-medieval">Health</span>
+<span class="font-medieval font-bold">285/320</span>
+</div>
+<div class="w-full bg-stone-800 rounded-full h-3 border border-red-700">
+<div class="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full" style="width:89%"></div>
+</div>
+</div>
+
+<div>
+<div class="flex justify-between text-xs text-stone-600 mb-1">
+<span class="font-medieval">Stamina</span>
+<span class="font-medieval font-bold">156/200</span>
+</div>
+<div class="w-full bg-stone-800 rounded-full h-3 border border-green-700">
+<div class="bg-gradient-to-r from-green-600 to-green-400 h-full rounded-full" style="width:78%"></div>
+</div>
+</div>
+</div>
+
+<div class="border-t-2 border-stone-400 mt-4 pt-4 space-y-2">
+<div class="flex items-center justify-between text-sm">
+<span class="text-stone-600 font-medieval">Attack</span>
+<span class="text-stone-800 font-medieval font-bold">42</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-stone-600 font-medieval">Defense</span>
+<span class="text-stone-800 font-medieval font-bold">28</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-stone-600 font-medieval">Speed</span>
+<span class="text-stone-800 font-medieval font-bold">35</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-stone-600 font-medieval">Critical</span>
+<span class="text-stone-800 font-medieval font-bold">18%</span>
+</div>
+</div>
+</div>
+
+<div id="equipment-slots" class="parchment-bg border-carved shadow-medieval p-4">
+<h4 class="font-medieval text-lg text-stone-800 font-bold mb-3 text-center">Equipment</h4>
+<div class="space-y-3">
+<div class="item-slot equipped h-16 flex items-center justify-center relative group">
+<i class="fa-solid fa-helmet-battle text-amber-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">+5</span>
+</div>
+<div class="absolute left-full ml-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-amber-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm">Shadow Helm</div>
+<div class="text-xs text-green-400">+12 Defense</div>
+<div class="text-xs text-blue-400">+5% Stealth</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot equipped h-16 flex items-center justify-center relative group">
+<i class="fa-solid fa-vest text-amber-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">+8</span>
+</div>
+<div class="absolute left-full ml-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-purple-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm">Leather Armor</div>
+<div class="text-xs text-green-400">+20 Defense</div>
+<div class="text-xs text-blue-400">+8% Dodge</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot equipped h-16 flex items-center justify-center relative group">
+<i class="fa-solid fa-hand-back-fist text-amber-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">+6</span>
+</div>
+<div class="absolute left-full ml-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-amber-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm">Steel Gauntlets</div>
+<div class="text-xs text-red-400">+8 Attack</div>
+<div class="text-xs text-green-400">+6 Defense</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot equipped h-16 flex items-center justify-center relative group">
+<i class="fa-solid fa-dagger text-red-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">+12</span>
+</div>
+<div class="absolute left-full ml-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-red-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm">Venomous Dagger</div>
+<div class="text-xs text-red-400">+25 Attack</div>
+<div class="text-xs text-purple-400">Poison Damage</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot h-16 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-50"></i>
+</div>
+
+<div class="item-slot h-16 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-50"></i>
+</div>
+</div>
+</div>
+</div>
+
+<div id="inventory-main" class="col-span-9">
+<div class="parchment-bg border-carved shadow-medieval p-4 mb-4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex space-x-2">
+<button class="btn-medieval text-amber-100 font-medieval py-2 px-4 text-sm"><i class="fa-solid fa-th-large mr-2"></i>All Items</button>
+<button class="bg-stone-600 hover:bg-stone-500 text-stone-100 font-medieval py-2 px-4 rounded border-2 border-stone-700 transition-all text-sm"><i class="fa-solid fa-sword mr-2"></i>Weapons</button>
+<button class="bg-stone-600 hover:bg-stone-500 text-stone-100 font-medieval py-2 px-4 rounded border-2 border-stone-700 transition-all text-sm"><i class="fa-solid fa-shield mr-2"></i>Armor</button>
+<button class="bg-stone-600 hover:bg-stone-500 text-stone-100 font-medieval py-2 px-4 rounded border-2 border-stone-700 transition-all text-sm"><i class="fa-solid fa-flask mr-2"></i>Consumables</button>
+<button class="bg-stone-600 hover:bg-stone-500 text-stone-100 font-medieval py-2 px-4 rounded border-2 border-stone-700 transition-all text-sm"><i class="fa-solid fa-scroll mr-2"></i>Quest Items</button>
+</div>
+<div class="flex items-center space-x-2">
+<input type="text" placeholder="Search items..." class="bg-stone-700 text-stone-100 px-3 py-2 rounded border-2 border-stone-600 font-medieval text-sm focus:outline-none focus:border-amber-600">
+<button class="btn-medieval text-amber-100 font-medieval py-2 px-3 text-sm"><i class="fa-solid fa-search"></i></button>
+</div>
+</div>
+
+<div id="inventory-grid" class="grid grid-cols-8 gap-2 mb-4">
+<div class="item-slot rarity-legendary h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-sword text-amber-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">15</span>
+</div>
+<div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-amber-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm text-amber-400">Excalibur</div>
+<div class="text-xs text-stone-300">Legendary Sword</div>
+<div class="text-xs text-red-400">+45 Attack</div>
+<div class="text-xs text-purple-400">Holy Damage</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot rarity-epic h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-shield-halved text-purple-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-purple-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">10</span>
+</div>
+<div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-purple-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm text-purple-400">Dragon Shield</div>
+<div class="text-xs text-stone-300">Epic Shield</div>
+<div class="text-xs text-green-400">+35 Defense</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot rarity-rare h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-flask text-blue-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">5</span>
+</div>
+<div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+<div class="bg-stone-900 text-amber-100 px-3 py-2 rounded-lg border-2 border-blue-600 shadow-lg whitespace-nowrap">
+<div class="font-medieval font-bold text-sm text-blue-400">Greater Healing</div>
+<div class="text-xs text-stone-300">Rare Potion x5</div>
+<div class="text-xs text-green-400">Restores 150 HP</div>
+</div>
+</div>
+</div>
+
+<div class="item-slot rarity-uncommon h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-bow-arrow text-green-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-green-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">8</span>
+</div>
+</div>
+
+<div class="item-slot rarity-uncommon h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-helmet-battle text-green-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-green-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">6</span>
+</div>
+</div>
+
+<div class="item-slot rarity-common h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-bread-slice text-gray-400 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-gray-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">12</span>
+</div>
+</div>
+
+<div class="item-slot rarity-rare h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-ring text-blue-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">3</span>
+</div>
+</div>
+
+<div class="item-slot rarity-epic h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-gem text-purple-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-purple-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">1</span>
+</div>
+</div>
+
+<div class="item-slot rarity-uncommon h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-scroll text-green-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-green-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">4</span>
+</div>
+</div>
+
+<div class="item-slot rarity-common h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-hammer text-gray-400 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-gray-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">1</span>
+</div>
+</div>
+
+<div class="item-slot rarity-rare h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-book text-blue-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">2</span>
+</div>
+</div>
+
+<div class="item-slot rarity-legendary h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-crown text-amber-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">1</span>
+</div>
+</div>
+
+<div class="item-slot rarity-common h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-bottle-water text-gray-400 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-gray-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">8</span>
+</div>
+</div>
+
+<div class="item-slot rarity-uncommon h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-wand-magic text-green-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-green-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">1</span>
+</div>
+</div>
+
+<div class="item-slot rarity-epic h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-staff text-purple-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-purple-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">1</span>
+</div>
+</div>
+
+<div class="item-slot rarity-rare h-20 flex items-center justify-center relative group">
+<i class="fa-solid fa-vest text-blue-500 text-2xl"></i>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 rounded-full border-2 border-stone-800 flex items-center justify-center">
+<span class="text-white text-xs font-bold">2</span>
+</div>
+</div>
+
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-stone-600 text-xl opacity-30"></i>
+</div>
+<div class="item-slot h-20 flex items-center justify-center">
+<i class="fa-solid fa-plus text-

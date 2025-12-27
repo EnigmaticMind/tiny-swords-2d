@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Bag</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>window.FontAwesomeConfig = {autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar {display: none;}
+        .parchment-bg {
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.15);
+            border-radius: 12px;
+        }
+        .shadow-medieval {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(0,0,0,0.15);
+            border-radius: 12px;
+        }
+        .border-carved {
+            border: 3px solid #5a4a3a;
+            position: relative;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.25), inset 0 -2px 4px rgba(255,255,255,0.15), 0 4px 8px rgba(0,0,0,0.15);
+            border-radius: 12px;
+        }
+        .skill-frame {
+            background: linear-gradient(135deg, #3a3230 0%, #2a2220 100%);
+            border: 3px solid #6b5b4d;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.35), 0 3px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -3px 6px rgba(0,0,0,0.35);
+        }
+        .skill-frame:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(0,0,0,0.3);
+        }
+        .btn-medieval {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5b4d 50%, #5d4e37 100%);
+            border: 3px solid #4a3f2a;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            position: relative;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.35), 0 3px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.25);
+        }
+        .btn-medieval::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            border-radius: 12px;
+        }
+        .btn-medieval:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(0,0,0,0.2);
+            filter: brightness(1.1);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7), 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .cooldown-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pulse-glow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'medieval': ['Cinzel', 'serif'],
+                        'elegant': ['Cormorant Garamond', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 font-elegant">
+    <div id="header" class="w-full py-6 text-center border-b-4 border-stone-600 bg-gradient-to-r from-stone-700 to-stone-800 shadow-medieval">
+        <h1 class="text-4xl font-medieval font-bold text-amber-200 text-shadow">Skill Bag</h1>
+        <p class="text-lg text-stone-300 mt-1 font-elegant">Manage Your Battle Skills</p>
+    </div>
+
+    <div id="main-container" class="max-w-7xl mx-auto px-8 py-8">
+        <div id="skill-bag-header" class="parchment-bg border-carved shadow-medieval p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="skill-frame w-20 h-20 rounded-xl flex items-center justify-center border-2 border-amber-600 pulse-glow">
+                        <i class="fa-solid fa-sack text-amber-400 text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-medieval font-bold text-stone-800">Current Bag</h2>
+                        <div class="flex items-center space-x-2 mt-1">
+                            <span class="text-3xl font-medieval font-bold text-amber-700">11</span>
+                            <span class="text-2xl text-stone-600 font-medieval">/</span>
+                            <span class="text-3xl font-medieval font-bold text-stone-700">14</span>
+                            <span class="text-sm text-stone-600 font-medieval ml-2">Skills Available</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-medieval text-amber-100 font-medieval py-3 px-6 rounded-lg shadow-medieval hover:shadow-lg">
+                    <i class="fa-solid fa-xmark mr-2"></i>Close Bag
+                </button>
+            </div>
+        </div>
+
+        <div id="active-skills-section" class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-medieval font-semibold text-stone-800">
+                    <i class="fa-solid fa-hand-sparkles text-amber-600 mr-2"></i>Active Skills in Bag
+                </h3>
+                <div class="parchment-bg border-2 border-amber-600 rounded-lg px-4 py-2">
+                    <span class="text-amber-900 font-medieval font-bold">11 Ready for Battle</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-red-600 hover:border-red-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-sword text-red-400 text-4xl group-hover:text-red-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Power Strike</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-red-600 flex items-center justify-center">
+                        <span class="text-red-400 text-xs font-medieval font-bold">1</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-red-600">
+                        <div class="font-bold mb-1">Power Strike</div>
+                        <div class="text-stone-300">Damage: 120-150</div>
+                        <div class="text-red-400">Cost: 15 Mana</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-orange-600 hover:border-orange-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-fire text-orange-400 text-4xl group-hover:text-orange-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Fireball</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-orange-600 flex items-center justify-center">
+                        <span class="text-orange-400 text-xs font-medieval font-bold">2</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-orange-600">
+                        <div class="font-bold mb-1">Fireball</div>
+                        <div class="text-stone-300">Damage: 100-130 AoE</div>
+                        <div class="text-orange-400">Cost: 20 Mana</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-blue-600 hover:border-blue-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-snowflake text-blue-400 text-4xl group-hover:text-blue-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Ice Blast</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                        <span class="text-blue-400 text-xs font-medieval font-bold">3</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-blue-600">
+                        <div class="font-bold mb-1">Ice Blast</div>
+                        <div class="text-stone-300">Damage: 90-110</div>
+                        <div class="text-blue-400">Slow: 30%</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-purple-600 hover:border-purple-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-bolt text-purple-400 text-4xl group-hover:text-purple-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Lightning</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-purple-600 flex items-center justify-center">
+                        <span class="text-purple-400 text-xs font-medieval font-bold">4</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-purple-600">
+                        <div class="font-bold mb-1">Lightning Strike</div>
+                        <div class="text-stone-300">Damage: 140-180</div>
+                        <div class="text-purple-400">Stun: 2s</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-green-600 hover:border-green-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-shield-halved text-green-400 text-4xl group-hover:text-green-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Shield Block</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-green-600 flex items-center justify-center">
+                        <span class="text-green-400 text-xs font-medieval font-bold">5</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-green-600">
+                        <div class="font-bold mb-1">Shield Block</div>
+                        <div class="text-stone-300">Block: 50 Damage</div>
+                        <div class="text-green-400">Duration: 5s</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-cyan-600 hover:border-cyan-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-droplet text-cyan-400 text-4xl group-hover:text-cyan-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Water Wave</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-cyan-600 flex items-center justify-center">
+                        <span class="text-cyan-400 text-xs font-medieval font-bold">6</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-cyan-600">
+                        <div class="font-bold mb-1">Water Wave</div>
+                        <div class="text-stone-300">Damage: 80-100 AoE</div>
+                        <div class="text-cyan-400">Knockback</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-yellow-600 hover:border-yellow-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-sun text-yellow-400 text-4xl group-hover:text-yellow-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Solar Flare</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-yellow-600 flex items-center justify-center">
+                        <span class="text-yellow-400 text-xs font-medieval font-bold">7</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-yellow-600">
+                        <div class="font-bold mb-1">Solar Flare</div>
+                        <div class="text-stone-300">Damage: 110-140</div>
+                        <div class="text-yellow-400">Blind: 3s</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-indigo-600 hover:border-indigo-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-moon text-indigo-400 text-4xl group-hover:text-indigo-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Moon Strike</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-indigo-600 flex items-center justify-center">
+                        <span class="text-indigo-400 text-xs font-medieval font-bold">8</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-indigo-600">
+                        <div class="font-bold mb-1">Moon Strike</div>
+                        <div class="text-stone-300">Damage: 95-125</div>
+                        <div class="text-indigo-400">Lifesteal: 20%</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-pink-600 hover:border-pink-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-heart text-pink-400 text-4xl group-hover:text-pink-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Heal</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-pink-600 flex items-center justify-center">
+                        <span class="text-pink-400 text-xs font-medieval font-bold">9</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-pink-600">
+                        <div class="font-bold mb-1">Healing Light</div>
+                        <div class="text-stone-300">Heal: 80-100 HP</div>
+                        <div class="text-pink-400">Cost: 25 Mana</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-lime-600 hover:border-lime-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-leaf text-lime-400 text-4xl group-hover:text-lime-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Nature's Wrath</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-lime-600 flex items-center justify-center">
+                        <span class="text-lime-400 text-xs font-medieval font-bold">10</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-lime-600">
+                        <div class="font-bold mb-1">Nature's Wrath</div>
+                        <div class="text-stone-300">Damage: 105-135</div>
+                        <div class="text-lime-400">Poison: 5s</div>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-teal-600 hover:border-teal-400 hover:scale-105 cursor-pointer transition-all duration-200 group relative">
+                    <i class="fa-solid fa-wind text-teal-400 text-4xl group-hover:text-teal-300"></i>
+                    <span class="text-amber-200 font-medieval text-sm mt-2">Wind Slash</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-800 rounded-full border-2 border-teal-600 flex items-center justify-center">
+                        <span class="text-teal-400 text-xs font-medieval font-bold">11</span>
+                    </div>
+                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-stone-900 text-amber-100 px-3 py-2 rounded-lg text-xs font-medieval opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border-2 border-teal-600">
+                        <div class="font-bold mb-1">Wind Slash</div>
+                        <div class="text-stone-300">Damage: 115-145</div>
+                        <div class="text-teal-400">Multi-hit: 3x</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cooldown-skills-section" class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-medieval font-semibold text-stone-800">
+                    <i class="fa-solid fa-clock text-stone-600 mr-2"></i>Skills on Cooldown
+                </h3>
+                <div class="parchment-bg border-2 border-stone-600 rounded-lg px-4 py-2">
+                    <span class="text-stone-700 font-medieval font-bold">3 Returning Soon</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-stone-600 opacity-60 cursor-not-allowed transition-all duration-200 relative">
+                    <div class="cooldown-overlay">
+                        <div class="text-center">
+                            <i class="fa-solid fa-hourglass-half text-stone-300 text-3xl mb-2"></i>
+                            <div class="text-amber-200 font-medieval text-2xl font-bold">2</div>
+                            <div class="text-stone-400 font-medieval text-xs">Turns</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-meteor text-stone-500 text-4xl"></i>
+                    <span class="text-stone-400 font-medieval text-sm mt-2">Meteor</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                        <span class="text-stone-400 text-xs font-medieval font-bold">12</span>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-stone-600 opacity-60 cursor-not-allowed transition-all duration-200 relative">
+                    <div class="cooldown-overlay">
+                        <div class="text-center">
+                            <i class="fa-solid fa-hourglass-half text-stone-300 text-3xl mb-2"></i>
+                            <div class="text-amber-200 font-medieval text-2xl font-bold">4</div>
+                            <div class="text-stone-400 font-medieval text-xs">Turns</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-skull text-stone-500 text-4xl"></i>
+                    <span class="text-stone-400 font-medieval text-sm mt-2">Death Ray</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                        <span class="text-stone-400 text-xs font-medieval font-bold">13</span>
+                    </div>
+                </div>
+
+                <div class="skill-frame w-full aspect-square rounded-xl flex flex-col items-center justify-center shadow-medieval border-2 border-stone-600 opacity-60 cursor-not-allowed transition-all duration-200 relative">
+                    <div class="cooldown-overlay">
+                        <div class="text-center">
+                            <i class="fa-solid fa-hourglass-half text-stone-300 text-3xl mb-2"></i>
+                            <div class="text-amber-200 font-medieval text-2xl font-bold">1</div>
+                            <div class="text-stone-400 font-medieval text-xs">Turn</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-dragon text-stone-500 text-4xl"></i>
+                    <span class="text-stone-400 font-medieval text-sm mt-2">Dragon Breath</span>
+                    <div class="absolute -top-2 -right-2 w-8 h-8 bg-stone-700 rounded-full border-2 border-stone-600 flex items-center justify-center">
+                        <span class="text-stone-400 text-xs font-medieval font-bold">14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bag-info-section" class="parchment-bg border-carved shadow-medieval p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="skill-frame w-16 h-16 rounded-xl flex items-center justify-center border-2 border-amber-600 mx-auto mb-3">
+                        <i class="fa-solid fa-hand-pointer text-amber-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-medieval font-bold text-stone-800 mb-2">Click to Use</h4>
+                    

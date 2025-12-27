@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn Icons</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        .parchment-bg {
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        }
+        .shadow-medieval {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        }
+        .border-carved {
+            border: 3px solid #5a4a3a;
+            position: relative;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .player-turn-icon {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            box-shadow: 
+                0 0 20px rgba(59, 130, 246, 0.6),
+                0 0 40px rgba(59, 130, 246, 0.4),
+                0 0 60px rgba(59, 130, 246, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            animation: playerPulse 2s ease-in-out infinite alternate;
+        }
+        .enemy-turn-icon {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+            box-shadow: 
+                0 0 20px rgba(239, 68, 68, 0.6),
+                0 0 40px rgba(239, 68, 68, 0.4),
+                0 0 60px rgba(239, 68, 68, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            animation: enemyPulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes playerPulse {
+            0% { 
+                box-shadow: 
+                    0 0 20px rgba(59, 130, 246, 0.6),
+                    0 0 40px rgba(59, 130, 246, 0.4),
+                    0 0 60px rgba(59, 130, 246, 0.2),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 30px rgba(59, 130, 246, 0.8),
+                    0 0 60px rgba(59, 130, 246, 0.6),
+                    0 0 90px rgba(59, 130, 246, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            }
+        }
+        @keyframes enemyPulse {
+            0% { 
+                box-shadow: 
+                    0 0 20px rgba(239, 68, 68, 0.6),
+                    0 0 40px rgba(239, 68, 68, 0.4),
+                    0 0 60px rgba(239, 68, 68, 0.2),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 30px rgba(239, 68, 68, 0.8),
+                    0 0 60px rgba(239, 68, 68, 0.6),
+                    0 0 90px rgba(239, 68, 68, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            }
+        }
+        .ornate-border {
+            clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
+        }
+        .diamond-border {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        .shield-border {
+            clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'medieval': ['Cinzel', 'serif'],
+                        'elegant': ['Cormorant Garamond', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-stone-200 min-h-screen font-elegant">
+    <div id="header" class="w-full py-8 text-center">
+        <h1 class="text-5xl font-medieval font-bold text-stone-800 text-shadow">Turn-Based Icons</h1>
+        <p class="text-xl text-stone-600 mt-2 font-elegant">Fancy Player & Enemy Turn Indicators</p>
+    </div>
+
+    <div id="main-container" class="max-w-7xl mx-auto px-8 pb-12">
+        <section id="fancy-turn-icons-section" class="mb-16">
+            <h2 class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">Glowing Turn Icons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                
+                <!-- Player Turn Icon -->
+                <div id="player-turn-display" class="text-center space-y-6">
+                    <h3 class="text-2xl font-medieval font-semibold text-blue-800">Player Turn</h3>
+                    <div class="flex justify-center">
+                        <div class="player-turn-icon ornate-border w-32 h-32 flex items-center justify-center relative">
+                            <div class="absolute inset-2 border-2 border-blue-200 ornate-border opacity-50"></div>
+                            <i class="fa-solid fa-crown text-blue-100 text-4xl drop-shadow-lg"></i>
+                            <div class="absolute -top-3 -right-3 w-8 h-8 bg-blue-600 rounded-full border-2 border-blue-200 flex items-center justify-center">
+                                <i class="fa-solid fa-star text-blue-100 text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-blue-700 font-medieval font-bold">Your Turn</div>
+                        <div class="text-sm text-blue-600">Choose your action</div>
+                    </div>
+                </div>
+
+                <!-- Enemy Turn Icon -->
+                <div id="enemy-turn-display" class="text-center space-y-6">
+                    <h3 class="text-2xl font-medieval font-semibold text-red-800">Enemy Turn</h3>
+                    <div class="flex justify-center">
+                        <div class="enemy-turn-icon ornate-border w-32 h-32 flex items-center justify-center relative">
+                            <div class="absolute inset-2 border-2 border-red-200 ornate-border opacity-50"></div>
+                            <i class="fa-solid fa-skull text-red-100 text-4xl drop-shadow-lg"></i>
+                            <div class="absolute -top-3 -right-3 w-8 h-8 bg-red-600 rounded-full border-2 border-red-200 flex items-center justify-center">
+                                <i class="fa-solid fa-exclamation text-red-100 text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-red-700 font-medieval font-bold">Enemy Turn</div>
+                        <div class="text-sm text-red-600">Prepare for attack</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="alternative-styles-section" class="mb-16">
+            <h2 class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">Alternative Styles</h2>
+            
+            <!-- Diamond Style -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-blue-800">Diamond Player</h4>
+                    <div class="flex justify-center">
+                        <div class="player-turn-icon diamond-border w-24 h-24 flex items-center justify-center relative">
+                            <i class="fa-solid fa-user text-blue-100 text-3xl drop-shadow-lg"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-red-800">Diamond Enemy</h4>
+                    <div class="flex justify-center">
+                        <div class="enemy-turn-icon diamond-border w-24 h-24 flex items-center justify-center relative">
+                            <i class="fa-solid fa-dragon text-red-100 text-3xl drop-shadow-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shield Style -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-blue-800">Shield Player</h4>
+                    <div class="flex justify-center">
+                        <div class="player-turn-icon shield-border w-28 h-28 flex items-center justify-center relative">
+                            <i class="fa-solid fa-shield-halved text-blue-100 text-3xl drop-shadow-lg"></i>
+                            <div class="absolute top-1 text-blue-100 text-xs font-medieval font-bold">P</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-red-800">Shield Enemy</h4>
+                    <div class="flex justify-center">
+                        <div class="enemy-turn-icon shield-border w-28 h-28 flex items-center justify-center relative">
+                            <i class="fa-solid fa-shield text-red-100 text-3xl drop-shadow-lg"></i>
+                            <div class="absolute top-1 text-red-100 text-xs font-medieval font-bold">E</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Circular Ornate Style -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-blue-800">Ornate Player</h4>
+                    <div class="flex justify-center">
+                        <div class="player-turn-icon w-32 h-32 rounded-full flex items-center justify-center relative border-4 border-blue-300">
+                            <div class="absolute inset-1 border-2 border-dashed border-blue-200 rounded-full opacity-60"></div>
+                            <div class="absolute inset-4 border border-blue-100 rounded-full opacity-40"></div>
+                            <i class="fa-solid fa-chess-king text-blue-100 text-4xl drop-shadow-lg"></i>
+                            <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-600 rounded-full border-2 border-blue-200 flex items-center justify-center">
+                                <i class="fa-solid fa-crown text-blue-100 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-red-800">Ornate Enemy</h4>
+                    <div class="flex justify-center">
+                        <div class="enemy-turn-icon w-32 h-32 rounded-full flex items-center justify-center relative border-4 border-red-300">
+                            <div class="absolute inset-1 border-2 border-dashed border-red-200 rounded-full opacity-60"></div>
+                            <div class="absolute inset-4 border border-red-100 rounded-full opacity-40"></div>
+                            <i class="fa-solid fa-chess-king text-red-100 text-4xl drop-shadow-lg transform rotate-180"></i>
+                            <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-600 rounded-full border-2 border-red-200 flex items-center justify-center">
+                                <i class="fa-solid fa-skull text-red-100 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hexagonal Style -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-blue-800">Hex Player</h4>
+                    <div class="flex justify-center">
+                        <div class="player-turn-icon w-28 h-28 flex items-center justify-center relative" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">
+                            <i class="fa-solid fa-sword text-blue-100 text-3xl drop-shadow-lg"></i>
+                            <div class="absolute top-2 left-1/2 transform -translate-x-1/2 text-blue-100 text-xs font-medieval font-bold">TURN</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center space-y-4">
+                    <h4 class="text-xl font-medieval text-red-800">Hex Enemy</h4>
+                    <div class="flex justify-center">
+                        <div class="enemy-turn-icon w-28 h-28 flex items-center justify-center relative" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">
+                            <i class="fa-solid fa-claw-marks text-red-100 text-3xl drop-shadow-lg"></i>
+                            <div class="absolute top-2 left-1/2 transform -translate-x-1/2 text-red-100 text-xs font-medieval font-bold">TURN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="status-effects-section" class="mb-16">
+            <h2 class="text-3xl font-medieval font-semibold text-stone-800 mb-8 text-center">Status Effects & Buffs/Debuffs</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Player Character Status -->
+                <div id="player-status-panel" class="parchment-bg border-carved shadow-medieval p-6">
+                    <div class="text-center mb-6">
+                        <h3 class="font-medieval text-xl text-stone-800 mb-2">Player Status</h3>
+                        <div class="player-turn-icon w-16 h-16 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fa-solid fa-user text-blue-100 text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Buffs -->
+                    <div class="mb-6">
+                        <h4 class="font-medieval text-green-700 mb-3 flex items-center">
+                            <i class="fa-solid fa-arrow-up mr-2"></i>Active Buffs
+                        </h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-green-800 border-2 border-green-600 rounded-lg p-3 text-center relative hover:bg-green-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-shield text-green-300 text-xl mb-1"></i>
+                                <div class="text-green-200 text-xs font-medieval">Defense</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border border-green-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">3</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-green-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        +25% Defense (3 turns)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-800 border-2 border-blue-600 rounded-lg p-3 text-center relative hover:bg-blue-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-bolt text-blue-300 text-xl mb-1"></i>
+                                <div class="text-blue-200 text-xs font-medieval">Haste</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border border-blue-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">5</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-blue-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        +50% Speed (5 turns)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-purple-800 border-2 border-purple-600 rounded-lg p-3 text-center relative hover:bg-purple-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-wand-magic text-purple-300 text-xl mb-1"></i>
+                                <div class="text-purple-200 text-xs font-medieval">Magic</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border border-purple-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">2</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-purple-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        +30% Magic Power (2 turns)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Debuffs -->
+                    <div>
+                        <h4 class="font-medieval text-red-700 mb-3 flex items-center">
+                            <i class="fa-solid fa-arrow-down mr-2"></i>Active Debuffs
+                        </h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-orange-800 border-2 border-orange-600 rounded-lg p-3 text-center relative hover:bg-orange-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-fire text-orange-300 text-xl mb-1"></i>
+                                <div class="text-orange-200 text-xs font-medieval">Burn</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full border border-orange-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">4</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-orange-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        -15 HP per turn (4 turns)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-stone-700 border-2 border-stone-500 rounded-lg p-3 text-center opacity-50">
+                                <i class="fa-solid fa-plus text-stone-400 text-xl mb-1"></i>
+                                <div class="text-stone-400 text-xs font-medieval">Empty</div>
+                            </div>
+                            <div class="bg-stone-700 border-2 border-stone-500 rounded-lg p-3 text-center opacity-50">
+                                <i class="fa-solid fa-plus text-stone-400 text-xl mb-1"></i>
+                                <div class="text-stone-400 text-xs font-medieval">Empty</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enemy Character Status -->
+                <div id="enemy-status-panel" class="parchment-bg border-carved shadow-medieval p-6">
+                    <div class="text-center mb-6">
+                        <h3 class="font-medieval text-xl text-stone-800 mb-2">Enemy Status</h3>
+                        <div class="enemy-turn-icon w-16 h-16 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fa-solid fa-dragon text-red-100 text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Buffs -->
+                    <div class="mb-6">
+                        <h4 class="font-medieval text-green-700 mb-3 flex items-center">
+                            <i class="fa-solid fa-arrow-up mr-2"></i>Active Buffs
+                        </h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-red-800 border-2 border-red-600 rounded-lg p-3 text-center relative hover:bg-red-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-fist-raised text-red-300 text-xl mb-1"></i>
+                                <div class="text-red-200 text-xs font-medieval">Rage</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-amber-600 rounded-full border border-red-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">6</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-red-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        +40% Attack (6 turns)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-stone-700 border-2 border-stone-500 rounded-lg p-3 text-center opacity-50">
+                                <i class="fa-solid fa-plus text-stone-400 text-xl mb-1"></i>
+                                <div class="text-stone-400 text-xs font-medieval">Empty</div>
+                            </div>
+                            <div class="bg-stone-700 border-2 border-stone-500 rounded-lg p-3 text-center opacity-50">
+                                <i class="fa-solid fa-plus text-stone-400 text-xl mb-1"></i>
+                                <div class="text-stone-400 text-xs font-medieval">Empty</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Debuffs -->
+                    <div>
+                        <h4 class="font-medieval text-red-700 mb-3 flex items-center">
+                            <i class="fa-solid fa-arrow-down mr-2"></i>Active Debuffs
+                        </h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-blue-800 border-2 border-blue-600 rounded-lg p-3 text-center relative hover:bg-blue-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-snowflake text-blue-300 text-xl mb-1"></i>
+                                <div class="text-blue-200 text-xs font-medieval">Freeze</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full border border-blue-400 flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">2</span>
+                                </div>
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <div class="bg-stone-900 text-blue-200 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                        -75% Speed (2 turns)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-purple-800 border-2 border-purple-600 rounded-lg p-3 text-center relative hover:bg-purple-700 transition-colors cursor-pointer group">
+                                <i class="fa-solid fa-eye-slash text-purple-300 text-xl mb-1"></i>
+                                <div class="text-purple-200 text-xs font-medieval">Blind</div>
+                                <div class="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full border border-purple-400 flex items-center justify-center">
+                                
